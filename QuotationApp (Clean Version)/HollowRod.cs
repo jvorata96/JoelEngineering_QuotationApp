@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace QuotationApp__Clean_Version_
 {
-    class HollowRod : RawMaterial
+    public class HollowRod : RawMaterial
     {
         private double _diameterOut;
         private double _diameterIn;

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace QuotationApp__Clean_Version_
 {
-    class Flat : RawMaterial
+    public class Flat : RawMaterial
     {
         private double _width;
         private double _thickness;

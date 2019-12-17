@@ -12,8 +12,6 @@ namespace QuotationApp__Clean_Version_
         private double _density;
         private double _costPerKg;
         private double _qty;
-        private double _unitCost;
-        private double _totalCost;
 
         public RawMaterial(string name, double density, double costPerKg, double qty)
         {
@@ -26,10 +24,10 @@ namespace QuotationApp__Clean_Version_
         {   get { return _name; } 
             set
             {
-                if (value == null)
-                    throw new ArgumentNullException("Error: Name is required.");
-                else if (String.IsNullOrWhiteSpace(value))
-                    throw new ArgumentException("Error: Name cannot consist of only white space.");
+                //if (value == null)
+                //    throw new ArgumentNullException("Error: Name is required.");
+                //else if (String.IsNullOrWhiteSpace(value))
+                //    throw new ArgumentException("Error: Name cannot consist of only white space.");
                 _name = value;
             }
         }
@@ -38,8 +36,8 @@ namespace QuotationApp__Clean_Version_
             get { return _density; }
             set
             {
-                if (value <= 0)
-                    throw new ArgumentException("Error: Density should be greater than 0.");
+                //if (value <= 0)
+                //    throw new ArgumentException("Error: Density should be greater than 0.");
                 _density = value;
             }
         }
@@ -48,8 +46,8 @@ namespace QuotationApp__Clean_Version_
             get { return _costPerKg; }
             set
             {
-                if (value < 0)
-                    throw new ArgumentException("Error: Cost/Kg cannot be negative.");
+                //if (value < 0)
+                //    throw new ArgumentException("Error: Cost/Kg cannot be negative.");
                 _costPerKg = value;
             }
         }
@@ -58,13 +56,14 @@ namespace QuotationApp__Clean_Version_
             get { return _qty; }
             set
             {
-                if (value < 0)
-                    throw new ArgumentException("Error: Quantity cannot be negative.");
+                //if (value < 0)
+                //    throw new ArgumentException("Error: Quantity cannot be negative.");
                 _qty = value;
             }
         }
-        public double UnitCost { get { return _unitCost; } protected set { _unitCost = value; } }
-        public double TotalCost { get { return _totalCost; } protected set { _totalCost = value; } }
+        public double Id { get; set; }
+        public double UnitCost { get; protected set; }
+        public double TotalCost { get; protected set; }
         public abstract void CalculateCost();
     }
 }

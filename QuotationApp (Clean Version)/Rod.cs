@@ -21,8 +21,8 @@ namespace QuotationApp__Clean_Version_
             get { return _diameter; }
             set
             {
-                if (value <= 0)
-                    throw new ArgumentException("Error: Diameter should be greater than 0.");
+                //if (value <= 0)
+                //    throw new ArgumentException("Error: Diameter should be greater than 0.");
                 _diameter = value;
             }
         }
@@ -31,8 +31,8 @@ namespace QuotationApp__Clean_Version_
             get { return _length; }
             set
             {
-                if (value <= 0)
-                    throw new ArgumentException("Error: Length should be greater than 0.");
+                //if (value <= 0)
+                //    throw new ArgumentException("Error: Length should be greater than 0.");
                 _length = value;
             }
         }
