@@ -23,8 +23,8 @@ namespace QuotationApp__Clean_Version_
             get { return _width; }
             set
             {
-                if (value <= 0)
-                    throw new ArgumentException("Error: Width should be greater than 0.");
+                //if (value <= 0)
+                //    throw new ArgumentException("Error: Width should be greater than 0.");
                 _width = value;
             }
         }
@@ -33,8 +33,8 @@ namespace QuotationApp__Clean_Version_
             get { return _thickness; }
             set
             {
-                if (value <= 0)
-                    throw new ArgumentException("Error: Thickness should be greater than 0.");
+                //if (value <= 0)
+                //    throw new ArgumentException("Error: Thickness should be greater than 0.");
                 _thickness = value;
             }
         }
@@ -43,8 +43,8 @@ namespace QuotationApp__Clean_Version_
             get { return _length; }
             set
             {
-                if (value <= 0)
-                    throw new ArgumentException("Error: Length should be greater than 0.");
+                //if (value <= 0)
+                //    throw new ArgumentException("Error: Length should be greater than 0.");
                 _length = value;
             }
         }

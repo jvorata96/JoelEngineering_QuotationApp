@@ -14,8 +14,11 @@ namespace QuotationApp__Clean_Version_
 
         private readonly Rod _blankRod = new Rod("New", 1, 1, 1, 1, 1);
         private readonly Flat _blankFlat = new Flat("New", 1, 1, 1, 1, 1, 1);
+        private readonly HollowRod _blankHollowRod = new HollowRod("New", 1, 1, 1, 1, 1, 1);
+
         public List<Rod> RodList { get; set; }
         public List<Flat> FlatList { get; set; }
+        public List <HollowRod> HollowRodList { get; set; }
 
 
         public SQLQuery()
@@ -166,7 +169,7 @@ namespace QuotationApp__Clean_Version_
                                     reader.IsDBNull(5) ? 0 : reader.GetDouble(5),
                                     reader.IsDBNull(4) ? 0 : reader.GetDouble(4))
                                 {
-                                    Id = reader.IsDBNull(6) ? 0 : reader.GetInt32(6)
+                                    Id = reader.IsDBNull(7) ? 0 : reader.GetInt32(7)
                                 };
 
                                 flat.CalculateCost();
@@ -226,6 +229,113 @@ namespace QuotationApp__Clean_Version_
 
                     StringBuilder sb = new StringBuilder();
                     sb.Append("DELETE FROM Flats WHERE ID=" + id.ToString());
+                    String sql = sb.ToString();
+
+                    Console.WriteLine(sb.ToString());
+
+                    using (SqlCommand command = new SqlCommand(sql, connection))
+                    {
+                        command.ExecuteNonQuery();
+                    }
+
+                }
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show(ex.Message + ex.Source);
+            }
+        }
+
+        public void GetHollowRods()
+        {
+            HollowRodList = new List<HollowRod> { _blankHollowRod };
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
+                {
+                    connection.Open();
+                    StringBuilder sb = new StringBuilder();
+
+                    sb.Append("SELECT * FROM HollowRods;");
+                    String sql = sb.ToString();
+
+                    Console.WriteLine(sb.ToString());
+
+                    using (SqlCommand command = new SqlCommand(sql, connection))
+                    {
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                HollowRod hollowRod = new HollowRod(
+                                    reader.IsDBNull(0) ? "Blank" : reader.GetString(0),
+                                    reader.IsDBNull(1) ? 0 : reader.GetDouble(1),
+                                    reader.IsDBNull(2) ? 0 : reader.GetDouble(2),
+                                    reader.IsDBNull(3) ? 0 : reader.GetDouble(3),
+                                    reader.IsDBNull(4) ? 0 : reader.GetDouble(4),
+                                    reader.IsDBNull(5) ? 0 : reader.GetDouble(5),
+                                    reader.IsDBNull(6) ? 0 : reader.GetDouble(6))
+                                {
+                                    Id = reader.IsDBNull(7) ? 0 : reader.GetInt32(7)
+                                };
+
+                                hollowRod.CalculateCost();
+                                HollowRodList.Add(hollowRod);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show(ex.Message + ex.Source);
+            }
+        }
+
+        public void AddHollowRod(HollowRod hollowRod)
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
+                {
+                    connection.Open();
+
+                    StringBuilder sb = new StringBuilder();
+                    sb.Append("INSERT INTO HollowRods VALUES ('");
+                    sb.Append(hollowRod.Name + "', ");
+                    sb.Append(hollowRod.Density + ", ");
+                    sb.Append(hollowRod.CostPerKg + ", ");
+                    sb.Append(hollowRod.Qty + ", ");
+                    sb.Append(hollowRod.DiameterOut + ", ");
+                    sb.Append(hollowRod.DiameterIn + ", ");
+                    sb.Append(hollowRod.Length + ");");
+                    String sql = sb.ToString();
+
+                    Console.WriteLine(sb.ToString());
+
+                    using (SqlCommand command = new SqlCommand(sql, connection))
+                    {
+                        command.ExecuteNonQuery();
+                    }
+
+                }
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show(ex.Message + ex.Source);
+            }
+        }
+
+        public void DeleteHollowRod(double id)
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
+                {
+                    connection.Open();
+
+                    StringBuilder sb = new StringBuilder();
+                    sb.Append("DELETE FROM HollowRods WHERE ID=" + id.ToString());
                     String sql = sb.ToString();
 
                     Console.WriteLine(sb.ToString());

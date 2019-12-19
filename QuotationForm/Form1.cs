@@ -24,6 +24,7 @@ namespace QuotationForm
 
         protected Rod currentRod = new Rod("Blank", 1, 1, 1, 1, 1);
         protected Flat currentFlat = new Flat("BlankFlat", 1, 1, 1, 1, 1, 1);
+        protected HollowRod currentHollowRod = new HollowRod("BlankHollow", 1, 1, 1, 1, 1, 1);
 
 
         public Form1()
@@ -38,12 +39,6 @@ namespace QuotationForm
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            RawMaterial shape = new Rod("Rod1", 1.23, 2, 3, 4, 6);
-            shape.CalculateCost();
-
-            Console.WriteLine("hey" + shape.TotalCost.ToString());
-
-
             sQLQuery = new SQLQuery();
             ComboMaterialType.DataSource = _materialTypes;
         }
@@ -76,12 +71,16 @@ namespace QuotationForm
                     label5.Text = "Outer Diameter";
                     label5.Location = new Point(105, 174);
                     TxtThickness.Visible = true;
+
+                    sQLQuery.GetHollowRods();
+                    rawMaterials = new List<RawMaterial>(sQLQuery.HollowRodList);
+
                     break;
                 case 2:
                     Print("Flats");
                     label11.Visible = true;
-                    label11.Text = "Height";
-                    label11.Location = new Point(78, 222);
+                    label11.Text = "Thickness";
+                    label11.Location = new Point(70, 222);
                     label5.Text = "Width";
                     label5.Location = new Point(126, 174);
                     TxtThickness.Visible = true;
@@ -115,10 +114,48 @@ namespace QuotationForm
                     BtnSaveRawMaterial.Visible = true;
                     Print("selected New*************************");
                     currentRod = new Rod("Blank", 1, 1, 1, 1, 1);
+                    currentFlat = new Flat("Blank", 1, 1, 1, 1, 1, 1);
                 }
                 else
                 {
-                    currentRod = (Rod)ComboMaterialName.SelectedItem;
+                    switch (ComboMaterialType.SelectedIndex)
+                    {
+                        case 0:
+                            currentRod = (Rod)ComboMaterialName.SelectedItem;
+                            TxtLength.Text = currentRod.Length.ToString();
+                            TxtDiameter.Text = currentRod.Diameter.ToString();
+                            TxtDensity.Text = currentRod.Density.ToString();
+                            TxtPricePerKilo.Text = string.Format("{0:C2}", currentRod.CostPerKg);
+                            TxtUnitPrice.Text = string.Format("{0:C2}", currentRod.UnitCost);
+                            TxtQty.Text = currentRod.Qty.ToString();
+                            TxtTotalPrice.Text = string.Format("{0:C2}", currentRod.TotalCost);
+                            break;
+                        case 1:
+                            currentHollowRod = (HollowRod)ComboMaterialName.SelectedItem;
+                            TxtLength.Text = currentHollowRod.Length.ToString();
+                            TxtDiameter.Text = currentHollowRod.DiameterOut.ToString();
+                            TxtThickness.Text = currentHollowRod.DiameterIn.ToString();
+                            TxtDensity.Text = currentHollowRod.Density.ToString();
+                            TxtPricePerKilo.Text = string.Format("{0:C2}", currentHollowRod.CostPerKg);
+                            TxtUnitPrice.Text = string.Format("{0:C2}", currentHollowRod.UnitCost);
+                            TxtQty.Text = currentHollowRod.Qty.ToString();
+                            TxtTotalPrice.Text = string.Format("{0:C2}", currentHollowRod.TotalCost);
+                            break;
+                        case 2:
+                            currentFlat = (Flat)ComboMaterialName.SelectedItem;
+                            TxtLength.Text = currentFlat.Length.ToString();
+                            TxtDiameter.Text = currentFlat.Width.ToString();
+                            TxtThickness.Text = currentFlat.Thickness.ToString();
+                            TxtDensity.Text = currentFlat.Density.ToString();
+                            TxtPricePerKilo.Text = string.Format("{0:C2}", currentFlat.CostPerKg);
+                            TxtUnitPrice.Text = string.Format("{0:C2}", currentFlat.UnitCost);
+                            TxtQty.Text = currentFlat.Qty.ToString();
+                            TxtTotalPrice.Text = string.Format("{0:C2}", currentFlat.TotalCost);
+                            break;
+                        default:
+                            break;
+                    }
+                    
                     TxtDensity.ReadOnly = true;
                     TxtRawName.Visible = false;
                     BtnSaveRawMaterial.Visible = false;
@@ -126,13 +163,7 @@ namespace QuotationForm
 
                 //var currentMaterial = (Rod)ComboMaterialName.SelectedItem;
 
-                TxtLength.Text = currentRod.Length.ToString();
-                TxtDiameter.Text = currentRod.Diameter.ToString();
-                TxtDensity.Text = currentRod.Density.ToString();
-                TxtPricePerKilo.Text = string.Format("{0:C2}", currentRod.CostPerKg);
-                TxtUnitPrice.Text = string.Format("{0:C2}", currentRod.UnitCost);
-                TxtQty.Text = currentRod.Qty.ToString();
-                TxtTotalPrice.Text = string.Format("{0:C2}", currentRod.TotalCost);
+                
             }
         }
 
@@ -169,9 +200,34 @@ namespace QuotationForm
                         break;
                     case 1:
                         Print("Hollows");
+                        sb = new StringBuilder();
+                        UpdateCurrentHollowRod();
+                        sQLQuery.AddHollowRod(currentHollowRod);
+                        sb.AppendLine(currentHollowRod.Name);
+                        sb.AppendLine(currentHollowRod.Density.ToString());
+                        sb.AppendLine(currentHollowRod.CostPerKg.ToString());
+                        sb.AppendLine(currentHollowRod.Qty.ToString());
+                        sb.AppendLine(currentHollowRod.DiameterOut.ToString());
+                        sb.AppendLine(currentHollowRod.DiameterIn.ToString());
+                        sb.AppendLine(currentHollowRod.Length.ToString());
+                        Print(sb.ToString());
                         break;
                     case 2:
-                        Print("Flats");
+                        Print("Flats333");
+
+                        //currentRod = new Rod()
+
+                        sb = new StringBuilder();
+                        UpdateCurrentFlat();
+                        sQLQuery.AddFlat(currentFlat);
+                        sb.AppendLine(currentFlat.Name);
+                        sb.AppendLine(currentFlat.Density.ToString());
+                        sb.AppendLine(currentFlat.CostPerKg.ToString());
+                        sb.AppendLine(currentFlat.Qty.ToString());
+                        sb.AppendLine(currentFlat.Length.ToString());
+                        sb.AppendLine(currentFlat.Thickness.ToString());
+                        sb.AppendLine(currentFlat.Width.ToString());
+                        Print(sb.ToString());
                         break;
                     default:
                         Print("default");
@@ -185,7 +241,24 @@ namespace QuotationForm
         private void BtnDeleteRawMaterial_Click(object sender, EventArgs e)
         {
             var currentMaterial = (RawMaterial)ComboMaterialName.SelectedItem;
-            sQLQuery.DeleteRod(currentMaterial.Id);
+            switch(ComboMaterialType.SelectedIndex)
+            {
+                case 0:
+                    sQLQuery.DeleteRod(currentMaterial.Id);
+                    break;
+                case 1:
+                    //sQLQuery.DeleteRod(currentMaterial.Id);
+                    sQLQuery.DeleteHollowRod(currentMaterial.Id);
+
+                    break;
+                case 2:
+                    sQLQuery.DeleteFlat(currentMaterial.Id);
+
+                    break;
+                default:
+                    break;
+            }
+            
             DisplayMaterials();
         }
 
@@ -197,6 +270,8 @@ namespace QuotationForm
             {
                 //currentRod = ((Rod)ComboMaterialName.SelectedItem);
                 currentRod.Length = length;
+                currentFlat.Length = length;
+                currentHollowRod.Length = length;
                 ShowTotalPriceRaw();
             }
 
@@ -204,7 +279,18 @@ namespace QuotationForm
 
         private void TxtLength_LostFocus(object sender, EventArgs e)
         {
-            TxtLength.Text = string.Format("{0:N6}", currentRod.Length);
+            switch(ComboMaterialType.SelectedIndex)
+            {
+                case 0:
+                    TxtLength.Text = string.Format("{0:N6}", currentRod.Length);
+                    break;
+                case 1:
+                    TxtLength.Text = string.Format("{0:N6}", currentHollowRod.Length);
+                    break;
+                case 2:
+                    TxtLength.Text = string.Format("{0:N6}", currentFlat.Length);
+                    break;
+            }
         }
 
         private void TxtDiameter_TextChanged(object sender, EventArgs e)
@@ -215,23 +301,55 @@ namespace QuotationForm
             {
                 //currentRod = ((Rod)ComboMaterialName.SelectedItem);
                 currentRod.Diameter = diameter;
+                currentFlat.Width = diameter;
+                currentHollowRod.DiameterOut = diameter;
                 ShowTotalPriceRaw();
             }
         }
 
         private void TxtDiameter_LostFocus(object sender, EventArgs e)
-        {
-            TxtDiameter.Text = string.Format("{0:N6}", currentRod.Diameter);
+        {     
+            switch (ComboMaterialType.SelectedIndex)
+            {
+                case 0:
+                    TxtDiameter.Text = string.Format("{0:N6}", currentRod.Diameter);
+                    break;
+                case 1:
+                    TxtDiameter.Text = string.Format("{0:N6}", currentHollowRod.DiameterOut);
+                    break;
+                case 2:
+                    TxtDiameter.Text = string.Format("{0:N6}", currentFlat.Width);
+                    break;
+            }
         }
 
         private void TxtThickness_TextChanged(object sender, EventArgs e)
         {
-           
+            bool isNumeric = double.TryParse(TxtThickness.Text, out double thickness);
+
+            if (TxtLength.TextLength > 0 && isNumeric)
+            {
+                //currentRod = ((Rod)ComboMaterialName.SelectedItem);
+                //currentRod.Diameter = thickness;
+                currentFlat.Thickness = thickness;
+                currentHollowRod.DiameterIn = thickness;
+                ShowTotalPriceRaw();
+            }
         }
 
         private void TxtThickness_LostFocus(object sender, EventArgs e)
         {
-            TxtDiameter.Text = string.Format("{0:N6}", currentRod.Diameter);
+            switch (ComboMaterialType.SelectedIndex)
+            {
+                case 0:
+                    break;
+                case 1:
+                    TxtThickness.Text = string.Format("{0:N6}", currentHollowRod.DiameterIn);
+                    break;
+                case 2:
+                    TxtThickness.Text = string.Format("{0:N6}", currentFlat.Thickness);
+                    break;
+            }
         }
 
         private void TxtPricePerKilo_TextChanged(object sender, EventArgs e)
@@ -242,13 +360,28 @@ namespace QuotationForm
             {
                 //currentRod = ((Rod)ComboMaterialName.SelectedItem);
                 currentRod.CostPerKg = (double)pricePerKilo;
+                currentFlat.CostPerKg = (double)pricePerKilo;
+                currentHollowRod.CostPerKg = (double)pricePerKilo;
+                
                 ShowTotalPriceRaw();
             }
         }
 
         private void TxtPricePerKilo_LostFocus(object sender, EventArgs e)
         {
-            TxtPricePerKilo.Text = string.Format("{0:C2}", currentRod.CostPerKg);
+            
+            switch (ComboMaterialType.SelectedIndex)
+            {
+                case 0:
+                    TxtPricePerKilo.Text = string.Format("{0:C2}", currentRod.CostPerKg);
+                    break;
+                case 1:
+                    TxtPricePerKilo.Text = string.Format("{0:C2}", currentHollowRod.CostPerKg);
+                    break;
+                case 2:
+                    TxtPricePerKilo.Text = string.Format("{0:C2}", currentFlat.CostPerKg);
+                    break;
+            }
         }
 
         private void TxtQuantityRaw_TextChanged(object sender, EventArgs e)
@@ -259,13 +392,27 @@ namespace QuotationForm
             {
                 //currentRod = ((Rod)ComboMaterialName.SelectedItem);
                 currentRod.Qty = qty;
+                currentFlat.Qty = qty;
+                currentHollowRod.Qty = qty;
                 ShowTotalPriceRaw();
             }
         }
 
         private void TxtQuantityRaw_LostFocus(object sender, EventArgs e)
         {
-            TxtQty.Text = string.Format("{0:N}", currentRod.Qty);
+            
+            switch (ComboMaterialType.SelectedIndex)
+            {
+                case 0:
+                    TxtQty.Text = string.Format("{0:N}", currentRod.Qty);
+                    break;
+                case 1:
+                    TxtQty.Text = string.Format("{0:N}", currentHollowRod.Qty);
+                    break;
+                case 2:
+                    TxtQty.Text = string.Format("{0:N}", currentFlat.Qty);
+                    break;
+            }
         }
 
         private void TxtDensity_TextChanged(object sender, EventArgs e)
@@ -276,6 +423,8 @@ namespace QuotationForm
             {
                 //currentRod = ((Rod)ComboMaterialName.SelectedItem);
                 currentRod.Density = density;
+                currentFlat.Density = density;
+                currentHollowRod.Density = density;
                 //UpdateCurrentRod();
                 ShowTotalPriceRaw();
             }
@@ -283,9 +432,21 @@ namespace QuotationForm
 
         private void TxtDensity_LostFocus(object sender, EventArgs e)
         {
-            //TxtDensity.Text = string.Format("{0:N}", ((Rod)ComboMaterialName.SelectedItem).Density);
-            TxtDensity.Text = string.Format("{0:N}", currentRod.Density);
+            switch (ComboMaterialType.SelectedIndex)
+            {
+                case 0:
+                    TxtDensity.Text = string.Format("{0:F0}", currentRod.Density);
+                    break;
+                case 1:
+                    TxtDensity.Text = string.Format("{0:F0}", currentHollowRod.Density);
+                    break;
+                case 2:
+                    TxtDensity.Text = string.Format("{0:F0}", currentFlat.Density);
+                    break;
+            }
         }
+
+        
 
         private void UpdateCurrentRod()
         {
@@ -303,13 +464,100 @@ namespace QuotationForm
                 MessageBox.Show(ex.Source + ": " + ex.Message);
             }
         }
+        private void UpdateCurrentFlat()
+        {
+            try
+            {
+                currentFlat.Name = TxtRawName.Text;
+                currentFlat.Density = double.Parse(TxtDensity.Text);
+                currentFlat.CostPerKg = double.Parse(TxtPricePerKilo.Text, NumberStyles.Currency);
+                currentFlat.Qty = double.Parse(TxtQty.Text);
+                currentFlat.Thickness = double.Parse(TxtThickness.Text);
+                currentFlat.Length = double.Parse(TxtLength.Text);
+                currentFlat.Width = double.Parse(TxtDiameter.Text);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Source + ": " + ex.Message);
+            }
+        }
+
+        private void UpdateCurrentHollowRod()
+        {
+            try
+            {
+                currentHollowRod.Name = TxtRawName.Text;
+                currentHollowRod.Density = double.Parse(TxtDensity.Text);
+                currentHollowRod.CostPerKg = double.Parse(TxtPricePerKilo.Text, NumberStyles.Currency);
+                currentHollowRod.Qty = double.Parse(TxtQty.Text);
+                currentHollowRod.DiameterIn = double.Parse(TxtThickness.Text);
+                currentHollowRod.Length = double.Parse(TxtLength.Text);
+                currentHollowRod.DiameterOut = double.Parse(TxtDiameter.Text);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Source + ": " + ex.Message);
+            }
+        }
 
         private void ShowTotalPriceRaw()
         {
-            currentRod.CalculateCost();
-            TxtUnitPrice.Text = string.Format("{0:C2}", currentRod.UnitCost);
-            TxtTotalPrice.Text = string.Format("{0:C2}", currentRod.TotalCost);
+            switch(ComboMaterialType.SelectedIndex)
+            {
+                case 0:
+                    currentRod.CalculateCost();
+                    TxtUnitPrice.Text = string.Format("{0:C2}", currentRod.UnitCost);
+                    TxtTotalPrice.Text = string.Format("{0:C2}", currentRod.TotalCost);
+                    break;
+                case 1:
+                    currentHollowRod.CalculateCost();
+                    TxtUnitPrice.Text = string.Format("{0:C2}", currentHollowRod.UnitCost);
+                    TxtTotalPrice.Text = string.Format("{0:C2}", currentHollowRod.TotalCost);
+                    break;
+                case 2:
+                    currentFlat.CalculateCost();
+                    TxtUnitPrice.Text = string.Format("{0:C2}", currentFlat.UnitCost);
+                    TxtTotalPrice.Text = string.Format("{0:C2}", currentFlat.TotalCost);
+                    break;
+                default:
+                    break;
+            }
+            
         }
 
+        private void TxtDensity_OnClick(object sender, EventArgs e)
+        {
+            TxtDensity.SelectAll();
+        }
+
+        private void TxtPricePerKilo_OnClick(object sender, EventArgs e)
+        {
+            TxtPricePerKilo.SelectAll();
+        }
+
+        private void TxtLength_OnClick(object sender, EventArgs e)
+        {
+            TxtLength.SelectAll();
+        }
+
+        private void TxtDiameter_OnClick(object sender, EventArgs e)
+        {
+            TxtDiameter.SelectAll();
+        }
+
+        private void TxtThickness_OnClick(object sender, EventArgs e)
+        {
+            TxtThickness.SelectAll();
+        }
+
+        private void TxtQty_OnClick(object sender, EventArgs e)
+        {
+            TxtQty.SelectAll();
+        }
+
+        private void TxtNameRaw_OnClick(object sender, EventArgs e)
+        {
+            TxtRawName.SelectAll();
+        }
     }
 }

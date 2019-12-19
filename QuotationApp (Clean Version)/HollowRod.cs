@@ -23,10 +23,10 @@ namespace QuotationApp__Clean_Version_
             get { return _diameterOut; }
             set
             {
-                if (value <= 0)
-                    throw new ArgumentException("Error: Outer diameter should be greater than 0.");
-                else if (value <= DiameterIn)
-                    throw new ArgumentException("Error: Outer diameter should be greater than inner diameter.");
+                //if (value <= 0)
+                //    throw new ArgumentException("Error: Outer diameter should be greater than 0.");
+                //else if (value <= DiameterIn)
+                //    throw new ArgumentException("Error: Outer diameter should be greater than inner diameter.");
                 _diameterOut = value;
             }
         }
@@ -35,10 +35,10 @@ namespace QuotationApp__Clean_Version_
             get { return _diameterIn; }
             set
             {
-                if (value <= 0)
-                    throw new ArgumentException("Error: Inner diameter should be greater than 0.");
-                else if (value >= DiameterIn)
-                    throw new ArgumentException("Error: Outer diameter should be greater than inner diameter.");
+                //if (value <= 0)
+                //    throw new ArgumentException("Error: Inner diameter should be greater than 0.");
+                //else if (value >= DiameterIn)
+                //    throw new ArgumentException("Error: Outer diameter should be greater than inner diameter.");
                 _diameterIn = value;
             }
         }
@@ -47,14 +47,14 @@ namespace QuotationApp__Clean_Version_
             get { return _length; }
             set
             {
-                if (value <= 0)
-                    throw new ArgumentException("Error: Length should be greater than 0.");
+                //if (value <= 0)
+                //    throw new ArgumentException("Error: Length should be greater than 0.");
                 _length = value;
             }
         }
         public override void CalculateCost()
         {
-            UnitCost = (Math.PI * Math.Pow((DiameterOut - DiameterIn) / 2, 2) * Length * Density * CostPerKg);
+            UnitCost = (Math.PI * (Math.Pow(DiameterOut/2, 2) - Math.Pow(DiameterIn/2, 2)) * Length * Density * CostPerKg);
             TotalCost = UnitCost * Qty;
         }
     }
