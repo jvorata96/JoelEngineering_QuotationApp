@@ -14,17 +14,21 @@ namespace QuotationForm
 {
     public partial class Form1 : Form
     {
+        private SQLQuery sQLQuery;
+
+        //***************FIELDS OF MATERIAL CALCULATOR**********************
         private enum _materialType {Rods, HollowRods, Flats};
         private readonly List<_materialType> _materialTypes = new List<_materialType>{_materialType.Rods, _materialType.HollowRods, _materialType.Flats };
 
-        private SQLQuery sQLQuery;
         List<RawMaterial> rawMaterials;
 
+        private Rod currentRod = new Rod("Blank", 1, 1, 1, 1, 1);
+        private Flat currentFlat = new Flat("BlankFlat", 1, 1, 1, 1, 1, 1);
+        private HollowRod currentHollowRod = new HollowRod("BlankHollow", 1, 1, 1, 1, 1, 1);
 
-
-        protected Rod currentRod = new Rod("Blank", 1, 1, 1, 1, 1);
-        protected Flat currentFlat = new Flat("BlankFlat", 1, 1, 1, 1, 1, 1);
-        protected HollowRod currentHollowRod = new HollowRod("BlankHollow", 1, 1, 1, 1, 1, 1);
+        //***************FIELDS OF QUOTATION**********************
+        private List<Material> materialList;
+        private Material currentProduct;
 
 
         public Form1()
@@ -41,7 +45,16 @@ namespace QuotationForm
         {
             sQLQuery = new SQLQuery();
             ComboMaterialType.DataSource = _materialTypes;
+
+            sQLQuery.GetProducts();
+            materialList = new List<Material>(sQLQuery.ProductList);
+
+            ComboBoxProducts.DisplayMember = "Name";
+            ComboBoxProducts.ValueMember = "Id";
+            ComboBoxProducts.DataSource = materialList;
         }
+
+        //***************START OF MATERIAL CALCULATOR**********************
 
         private void ComboMaterialType_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -446,8 +459,6 @@ namespace QuotationForm
             }
         }
 
-        
-
         private void UpdateCurrentRod()
         {
             try
@@ -559,5 +570,119 @@ namespace QuotationForm
         {
             TxtRawName.SelectAll();
         }
+
+        //***************END OF MATERIAL CALCULATOR**********************
+
+        //***************PRODUCT FUNTIONS**********************
+        private void BtnAddProduct_Click(object sender, EventArgs e)
+        {
+            var productName = ShowMyDialogBox();
+            if (productName.Length > 0)
+            {
+                //if (!IsProductAlreadyExist())
+                //{
+                    Material material = new Material
+                    {
+                        Name = productName,
+                    };
+
+                    sQLQuery.AddProduct(material);
+                    DisplayProducts();
+                //}
+                //else
+                //{
+                //    MessageBox.Show("Product Name already exists");
+                //}
+
+            }
+            else
+            {
+                MessageBox.Show("Please enter Product Name");
+            }
+            
+        }
+
+        private void DisplayProducts()
+        {
+            sQLQuery.GetProducts();
+
+            materialList = new List<Material>(sQLQuery.ProductList);
+
+            ComboBoxProducts.DisplayMember = "Name";
+            ComboBoxProducts.ValueMember = "Id";
+            ComboBoxProducts.DataSource = materialList;
+            ComboBoxProducts.SelectedItem = ComboBoxProducts.Items[ComboBoxProducts.Items.Count - 1];
+        }
+
+        private void BtnDeleteProduct_Click(object sender, EventArgs e)
+        {
+            sQLQuery.DeleteProduct(currentProduct.Id);
+            DisplayProducts();
+        }
+
+        public string ShowMyDialogBox()
+        {
+            Form2 testDialog = new Form2();
+            testDialog.Text = "Enter Job Name:";
+            var name = "blank";
+            // Show testDialog as a modal dialog and determine if DialogResult = OK.
+            if (testDialog.ShowDialog(this) == DialogResult.OK)
+            {
+                // Read the contents of testDialog's TextBox.
+                name = testDialog.TextBox1.Text.ToString();
+            }
+            else
+            {
+                name = testDialog.TextBox1.Text.ToString();
+            }
+            
+            testDialog.Dispose();
+            return name;
+        }
+
+        private void ComboBoxProducts_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (ComboBoxProducts.SelectedIndex != -1)
+            {
+                currentProduct = (Material)ComboBoxProducts.SelectedItem;
+                Console.WriteLine("Selected Product ID: " + currentProduct.Id.ToString());
+                DisplayQuoteMaterials();
+            }
+            else
+            {
+                currentProduct = new Material();    //WTF IS THIS? TEST IT WHEN ALL PRODUCTS ARE DELETED OR BEGIN APP WITH EMPTY PRODUCTS
+            }
+        }
+        //*****************MATERIAL FUNCTIONS*****************//
+        private void DisplayQuoteMaterials()
+        {
+
+            sQLQuery.GetMaterials(currentProduct.Id);
+
+            materialList = new List<Material>(sQLQuery.MaterialList);
+
+
+            DataGridMaterials.DataSource = null;
+            DataGridMaterials.DataSource = materialList;
+
+            DataGridMaterials.AutoResizeColumns();
+
+            DataGridMaterials.Columns["SubTotal"].DefaultCellStyle.Format = "C2";
+            DataGridMaterials.Columns["Price_Per_Piece"].DefaultCellStyle.Format = "C2";
+            DataGridMaterials.Columns["Subtotal"].HeaderText = "Sub Total";
+            DataGridMaterials.Columns["Price_Per_Piece"].HeaderText = "Price per Piece";
+
+
+            DataGridMaterials.Columns["Material_Cost"].Visible = false;
+            DataGridMaterials.Columns["Setup_Hr"].Visible = false;
+            DataGridMaterials.Columns["Setup_Cost"].Visible = false;
+            DataGridMaterials.Columns["Operation_Cost"].Visible = false;
+            DataGridMaterials.Columns["Operation_Hr"].Visible = false;
+            DataGridMaterials.Columns["Markup"].Visible = false;
+            //DataGridMaterials.Columns["Id"]
+
+            DataGridMaterials.ClearSelection();
+        }
+
     }
 }

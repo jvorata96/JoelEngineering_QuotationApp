@@ -52,6 +52,21 @@
             this.label10 = new System.Windows.Forms.Label();
             this.TxtThickness = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
+            this.ComboBoxProducts = new System.Windows.Forms.ComboBox();
+            this.BtnAddProduct = new System.Windows.Forms.Button();
+            this.BtnDeleteProduct = new System.Windows.Forms.Button();
+            this.label12 = new System.Windows.Forms.Label();
+            this.DataGridMaterials = new System.Windows.Forms.DataGridView();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.textBox6 = new System.Windows.Forms.TextBox();
+            this.textBox7 = new System.Windows.Forms.TextBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.DataGridMaterials)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -72,7 +87,7 @@
             "Hollow Rods",
             "Flats"});
             this.ComboMaterialType.Location = new System.Drawing.Point(20, 49);
-            this.ComboMaterialType.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ComboMaterialType.Margin = new System.Windows.Forms.Padding(4);
             this.ComboMaterialType.Name = "ComboMaterialType";
             this.ComboMaterialType.Size = new System.Drawing.Size(223, 24);
             this.ComboMaterialType.TabIndex = 1;
@@ -96,7 +111,7 @@
             "Hollow Rods",
             "Flats"});
             this.ComboMaterialName.Location = new System.Drawing.Point(20, 82);
-            this.ComboMaterialName.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ComboMaterialName.Margin = new System.Windows.Forms.Padding(4);
             this.ComboMaterialName.Name = "ComboMaterialName";
             this.ComboMaterialName.Size = new System.Drawing.Size(223, 24);
             this.ComboMaterialName.TabIndex = 3;
@@ -115,7 +130,7 @@
             // BtnSaveRawMaterial
             // 
             this.BtnSaveRawMaterial.Location = new System.Drawing.Point(80, 466);
-            this.BtnSaveRawMaterial.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.BtnSaveRawMaterial.Margin = new System.Windows.Forms.Padding(4);
             this.BtnSaveRawMaterial.Name = "BtnSaveRawMaterial";
             this.BtnSaveRawMaterial.Size = new System.Drawing.Size(100, 28);
             this.BtnSaveRawMaterial.TabIndex = 5;
@@ -126,7 +141,7 @@
             // BtnDeleteRawMaterial
             // 
             this.BtnDeleteRawMaterial.Location = new System.Drawing.Point(80, 502);
-            this.BtnDeleteRawMaterial.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.BtnDeleteRawMaterial.Margin = new System.Windows.Forms.Padding(4);
             this.BtnDeleteRawMaterial.Name = "BtnDeleteRawMaterial";
             this.BtnDeleteRawMaterial.Size = new System.Drawing.Size(100, 28);
             this.BtnDeleteRawMaterial.TabIndex = 6;
@@ -137,7 +152,7 @@
             // TxtRawName
             // 
             this.TxtRawName.Location = new System.Drawing.Point(48, 434);
-            this.TxtRawName.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.TxtRawName.Margin = new System.Windows.Forms.Padding(4);
             this.TxtRawName.Name = "TxtRawName";
             this.TxtRawName.Size = new System.Drawing.Size(165, 22);
             this.TxtRawName.TabIndex = 14;
@@ -148,7 +163,7 @@
             // TxtDensity
             // 
             this.TxtDensity.Location = new System.Drawing.Point(20, 127);
-            this.TxtDensity.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.TxtDensity.Margin = new System.Windows.Forms.Padding(4);
             this.TxtDensity.Name = "TxtDensity";
             this.TxtDensity.Size = new System.Drawing.Size(104, 22);
             this.TxtDensity.TabIndex = 8;
@@ -159,7 +174,7 @@
             // TxtPricePerKilo
             // 
             this.TxtPricePerKilo.Location = new System.Drawing.Point(139, 127);
-            this.TxtPricePerKilo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.TxtPricePerKilo.Margin = new System.Windows.Forms.Padding(4);
             this.TxtPricePerKilo.Name = "TxtPricePerKilo";
             this.TxtPricePerKilo.Size = new System.Drawing.Size(104, 22);
             this.TxtPricePerKilo.TabIndex = 9;
@@ -170,7 +185,7 @@
             // TxtQty
             // 
             this.TxtQty.Location = new System.Drawing.Point(20, 314);
-            this.TxtQty.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.TxtQty.Margin = new System.Windows.Forms.Padding(4);
             this.TxtQty.Name = "TxtQty";
             this.TxtQty.Size = new System.Drawing.Size(104, 22);
             this.TxtQty.TabIndex = 13;
@@ -181,7 +196,7 @@
             // TxtLength
             // 
             this.TxtLength.Location = new System.Drawing.Point(20, 186);
-            this.TxtLength.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.TxtLength.Margin = new System.Windows.Forms.Padding(4);
             this.TxtLength.Name = "TxtLength";
             this.TxtLength.Size = new System.Drawing.Size(104, 22);
             this.TxtLength.TabIndex = 10;
@@ -192,7 +207,7 @@
             // TxtDiameter
             // 
             this.TxtDiameter.Location = new System.Drawing.Point(139, 186);
-            this.TxtDiameter.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.TxtDiameter.Margin = new System.Windows.Forms.Padding(4);
             this.TxtDiameter.Name = "TxtDiameter";
             this.TxtDiameter.Size = new System.Drawing.Size(104, 22);
             this.TxtDiameter.TabIndex = 11;
@@ -253,7 +268,7 @@
             // TxtUnitPrice
             // 
             this.TxtUnitPrice.Location = new System.Drawing.Point(139, 314);
-            this.TxtUnitPrice.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.TxtUnitPrice.Margin = new System.Windows.Forms.Padding(4);
             this.TxtUnitPrice.Name = "TxtUnitPrice";
             this.TxtUnitPrice.ReadOnly = true;
             this.TxtUnitPrice.Size = new System.Drawing.Size(104, 22);
@@ -272,7 +287,7 @@
             // TxtTotalPrice
             // 
             this.TxtTotalPrice.Location = new System.Drawing.Point(77, 374);
-            this.TxtTotalPrice.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.TxtTotalPrice.Margin = new System.Windows.Forms.Padding(4);
             this.TxtTotalPrice.Name = "TxtTotalPrice";
             this.TxtTotalPrice.ReadOnly = true;
             this.TxtTotalPrice.Size = new System.Drawing.Size(104, 22);
@@ -291,7 +306,7 @@
             // TxtThickness
             // 
             this.TxtThickness.Location = new System.Drawing.Point(77, 245);
-            this.TxtThickness.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.TxtThickness.Margin = new System.Windows.Forms.Padding(4);
             this.TxtThickness.Name = "TxtThickness";
             this.TxtThickness.Size = new System.Drawing.Size(104, 22);
             this.TxtThickness.TabIndex = 12;
@@ -309,11 +324,158 @@
             this.label11.TabIndex = 23;
             this.label11.Text = "Thickness";
             // 
+            // ComboBoxProducts
+            // 
+            this.ComboBoxProducts.FormattingEnabled = true;
+            this.ComboBoxProducts.Items.AddRange(new object[] {
+            "Rods",
+            "Hollow Rods",
+            "Flats"});
+            this.ComboBoxProducts.Location = new System.Drawing.Point(326, 14);
+            this.ComboBoxProducts.Margin = new System.Windows.Forms.Padding(4);
+            this.ComboBoxProducts.Name = "ComboBoxProducts";
+            this.ComboBoxProducts.Size = new System.Drawing.Size(228, 24);
+            this.ComboBoxProducts.TabIndex = 24;
+            this.ComboBoxProducts.SelectedIndexChanged += new System.EventHandler(this.ComboBoxProducts_SelectedIndexChanged);
+            // 
+            // BtnAddProduct
+            // 
+            this.BtnAddProduct.Location = new System.Drawing.Point(601, 14);
+            this.BtnAddProduct.Margin = new System.Windows.Forms.Padding(4);
+            this.BtnAddProduct.Name = "BtnAddProduct";
+            this.BtnAddProduct.Size = new System.Drawing.Size(100, 28);
+            this.BtnAddProduct.TabIndex = 25;
+            this.BtnAddProduct.Text = "New";
+            this.BtnAddProduct.UseVisualStyleBackColor = true;
+            this.BtnAddProduct.Click += new System.EventHandler(this.BtnAddProduct_Click);
+            // 
+            // BtnDeleteProduct
+            // 
+            this.BtnDeleteProduct.Location = new System.Drawing.Point(601, 45);
+            this.BtnDeleteProduct.Margin = new System.Windows.Forms.Padding(4);
+            this.BtnDeleteProduct.Name = "BtnDeleteProduct";
+            this.BtnDeleteProduct.Size = new System.Drawing.Size(100, 28);
+            this.BtnDeleteProduct.TabIndex = 26;
+            this.BtnDeleteProduct.Text = "Delete";
+            this.BtnDeleteProduct.UseVisualStyleBackColor = true;
+            this.BtnDeleteProduct.Click += new System.EventHandler(this.BtnDeleteProduct_Click);
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(562, 17);
+            this.label12.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(31, 17);
+            this.label12.TabIndex = 27;
+            this.label12.Text = "Job";
+            // 
+            // DataGridMaterials
+            // 
+            this.DataGridMaterials.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DataGridMaterials.Location = new System.Drawing.Point(326, 86);
+            this.DataGridMaterials.Name = "DataGridMaterials";
+            this.DataGridMaterials.RowHeadersVisible = false;
+            this.DataGridMaterials.RowHeadersWidth = 51;
+            this.DataGridMaterials.RowTemplate.Height = 24;
+            this.DataGridMaterials.Size = new System.Drawing.Size(375, 301);
+            this.DataGridMaterials.TabIndex = 28;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(326, 402);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(4);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(104, 22);
+            this.textBox1.TabIndex = 29;
+            // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(461, 402);
+            this.textBox2.Margin = new System.Windows.Forms.Padding(4);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(104, 22);
+            this.textBox2.TabIndex = 30;
+            // 
+            // textBox3
+            // 
+            this.textBox3.Location = new System.Drawing.Point(597, 402);
+            this.textBox3.Margin = new System.Windows.Forms.Padding(4);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(104, 22);
+            this.textBox3.TabIndex = 31;
+            // 
+            // textBox4
+            // 
+            this.textBox4.Location = new System.Drawing.Point(326, 466);
+            this.textBox4.Margin = new System.Windows.Forms.Padding(4);
+            this.textBox4.Name = "textBox4";
+            this.textBox4.Size = new System.Drawing.Size(104, 22);
+            this.textBox4.TabIndex = 32;
+            // 
+            // textBox5
+            // 
+            this.textBox5.Location = new System.Drawing.Point(461, 466);
+            this.textBox5.Margin = new System.Windows.Forms.Padding(4);
+            this.textBox5.Name = "textBox5";
+            this.textBox5.Size = new System.Drawing.Size(104, 22);
+            this.textBox5.TabIndex = 33;
+            // 
+            // textBox6
+            // 
+            this.textBox6.Location = new System.Drawing.Point(597, 466);
+            this.textBox6.Margin = new System.Windows.Forms.Padding(4);
+            this.textBox6.Name = "textBox6";
+            this.textBox6.Size = new System.Drawing.Size(104, 22);
+            this.textBox6.TabIndex = 34;
+            // 
+            // textBox7
+            // 
+            this.textBox7.Location = new System.Drawing.Point(326, 519);
+            this.textBox7.Margin = new System.Windows.Forms.Padding(4);
+            this.textBox7.Name = "textBox7";
+            this.textBox7.Size = new System.Drawing.Size(104, 22);
+            this.textBox7.TabIndex = 35;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(461, 516);
+            this.button1.Margin = new System.Windows.Forms.Padding(4);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(104, 28);
+            this.button1.TabIndex = 36;
+            this.button1.Text = "New";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(597, 516);
+            this.button2.Margin = new System.Windows.Forms.Padding(4);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(104, 28);
+            this.button2.TabIndex = 37;
+            this.button2.Text = "Delete";
+            this.button2.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1067, 554);
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.textBox7);
+            this.Controls.Add(this.textBox6);
+            this.Controls.Add(this.textBox5);
+            this.Controls.Add(this.textBox4);
+            this.Controls.Add(this.textBox3);
+            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.DataGridMaterials);
+            this.Controls.Add(this.label12);
+            this.Controls.Add(this.BtnDeleteProduct);
+            this.Controls.Add(this.BtnAddProduct);
+            this.Controls.Add(this.ComboBoxProducts);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.TxtThickness);
             this.Controls.Add(this.label10);
@@ -338,10 +500,11 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.ComboMaterialType);
             this.Controls.Add(this.label1);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.DataGridMaterials)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -373,6 +536,20 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TextBox TxtThickness;
         private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.ComboBox ComboBoxProducts;
+        private System.Windows.Forms.Button BtnAddProduct;
+        private System.Windows.Forms.Button BtnDeleteProduct;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.DataGridView DataGridMaterials;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.TextBox textBox5;
+        private System.Windows.Forms.TextBox textBox6;
+        private System.Windows.Forms.TextBox textBox7;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
     }
 }
 
