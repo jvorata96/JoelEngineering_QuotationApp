@@ -71,6 +71,9 @@ namespace QuotationForm
                     break;
                 case 0:
                     Print("Rods");
+                    label5.Text = "Diameter";
+                    label5.Location = new Point(118, 174);
+
                     sQLQuery.GetRods();
                     rawMaterials = new List<RawMaterial>(sQLQuery.RodList);
 
@@ -485,6 +488,7 @@ namespace QuotationForm
                 MessageBox.Show(ex.Source + ": " + ex.Message);
             }
         }
+
         private void UpdateCurrentFlat()
         {
             try
@@ -737,6 +741,7 @@ namespace QuotationForm
                     {
                         Name = TxtName.Text,
                         Qty = double.Parse(TxtQtyQuote.Text),
+                        //Material_Cost = double.Parse(TxtMaterialCost.Text, NumberStyles.Any),
                         Material_Cost = double.Parse(TxtMaterialCost.Text, NumberStyles.Any),
                         Markup = double.Parse(TxtMarkup.Text),
                         Setup_Cost = double.Parse(TxtSetupCost.Text, NumberStyles.Any),
@@ -749,7 +754,7 @@ namespace QuotationForm
                 }
                 catch(Exception ex)
                 {
-                    MessageBox.Show("Error:" + ex.Message + ex.Source);
+                    MessageBox.Show("Error:" + ex.Message);
                 }
             }
             else
@@ -773,10 +778,10 @@ namespace QuotationForm
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Error:" + ex.Message + ex.Source);
+                    MessageBox.Show("Error:" + ex.Message);
                 }
             }
-            Print("Qty" + currentMaterial.Qty.ToString());
+            
         }
 
         private void DataGridMaterials_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -800,7 +805,7 @@ namespace QuotationForm
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Error:" + ex.Message + " - " + ex.Source);
+                    MessageBox.Show("Error:" + ex.Message);
                 }
             }
         }
@@ -879,16 +884,23 @@ namespace QuotationForm
             //}
             if (AreAllFilledOut())
             {
-                UpdateCurrentMaterial();
-                if (currentMaterial.Id == 0)
+                try
                 {
-                    sQLQuery.AddMaterial(currentMaterial);
+                    UpdateCurrentMaterial();
+                    if (currentMaterial.Id == 0)
+                    {
+                        sQLQuery.AddMaterial(currentMaterial);
+                    }
+                    else
+                    {
+                        sQLQuery.ModifyMaterial(currentMaterial);
+                    }
+                    DisplayQuoteMaterials();
                 }
-                else
+                catch(Exception ex)
                 {
-                    sQLQuery.ModifyMaterial(currentMaterial);
+                    MessageBox.Show("Error: " + ex.Message + ex.Source);
                 }
-                DisplayQuoteMaterials();
             }
             else
             {
@@ -899,9 +911,16 @@ namespace QuotationForm
 
         private void BtnDeleteMaterial_Click(object sender, EventArgs e)
         {
-            sQLQuery.DeleteMaterial(currentMaterial.Id);
+            if(DataGridMaterials.SelectedRows.Count > 0)
+            {
+                sQLQuery.DeleteMaterial(currentMaterial.Id);
 
-            DisplayQuoteMaterials();
+                DisplayQuoteMaterials();
+            }
+            else
+            {
+                MessageBox.Show("Please select a Material to delete above.");
+            }
         }
 
         private void DataGridMaterials_KeyDown(object sender, KeyEventArgs e)
