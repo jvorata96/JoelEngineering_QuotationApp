@@ -27,9 +27,10 @@ namespace QuotationForm
         private HollowRod currentHollowRod = new HollowRod("BlankHollow", 1, 1, 1, 1, 1, 1);
 
         //***************FIELDS OF QUOTATION**********************
+        private List<Material> productList;
         private List<Material> materialList;
         private Material currentProduct;
-
+        private Material currentMaterial;
 
         public Form1()
         {
@@ -47,11 +48,11 @@ namespace QuotationForm
             ComboMaterialType.DataSource = _materialTypes;
 
             sQLQuery.GetProducts();
-            materialList = new List<Material>(sQLQuery.ProductList);
+            productList = new List<Material>(sQLQuery.ProductList);
 
             ComboBoxProducts.DisplayMember = "Name";
             ComboBoxProducts.ValueMember = "Id";
-            ComboBoxProducts.DataSource = materialList;
+            ComboBoxProducts.DataSource = productList;
         }
 
         //***************START OF MATERIAL CALCULATOR**********************
@@ -66,7 +67,7 @@ namespace QuotationForm
             switch (ComboMaterialType.SelectedIndex)
             {
                 case -1:
-                    Print("New");
+                    Print("New"); 
                     break;
                 case 0:
                     Print("Rods");
@@ -125,9 +126,20 @@ namespace QuotationForm
                     TxtDensity.ReadOnly = false;
                     TxtRawName.Visible = true;
                     BtnSaveRawMaterial.Visible = true;
-                    Print("selected New*************************");
+                    BtnDeleteRawMaterial.Visible = false;
+                    Print("selected New************************222*");
                     currentRod = new Rod("Blank", 1, 1, 1, 1, 1);
                     currentFlat = new Flat("Blank", 1, 1, 1, 1, 1, 1);
+                    currentHollowRod = new HollowRod("BlankHollow", 1, 1, 1, 1, 1, 1);
+                    TxtRawName.Clear();
+                    TxtDensity.Clear();
+                    TxtPricePerKilo.Clear();
+                    TxtQty.Clear();
+                    TxtLength.Clear();
+                    TxtDiameter.Clear();
+                    TxtThickness.Clear();
+                    TxtUnitPrice.Clear();
+                    TxtTotalPrice.Clear();
                 }
                 else
                 {
@@ -172,6 +184,8 @@ namespace QuotationForm
                     TxtDensity.ReadOnly = true;
                     TxtRawName.Visible = false;
                     BtnSaveRawMaterial.Visible = false;
+                    Print("balik visible delete");
+                    BtnDeleteRawMaterial.Visible = true;
                 }
 
                 //var currentMaterial = (Rod)ComboMaterialName.SelectedItem;
@@ -182,10 +196,6 @@ namespace QuotationForm
 
         private void BtnSaveRawMaterial_Click(object sender, EventArgs e)
         {
-            //Rod rod = new Rod("SS316 ROUND", 8000, 12, 1, 0.025, 0.225);
-            //if ()
-            //var currentMaterial = (RawMaterial)ComboMaterialName.SelectedItem;
-
             if (ComboMaterialName.SelectedIndex >= 0)
             {
                 switch (ComboMaterialType.SelectedIndex)
@@ -448,13 +458,13 @@ namespace QuotationForm
             switch (ComboMaterialType.SelectedIndex)
             {
                 case 0:
-                    TxtDensity.Text = string.Format("{0:F0}", currentRod.Density);
+                    TxtDensity.Text = string.Format("{0:F}", currentRod.Density);
                     break;
                 case 1:
-                    TxtDensity.Text = string.Format("{0:F0}", currentHollowRod.Density);
+                    TxtDensity.Text = string.Format("{0:F}", currentHollowRod.Density);
                     break;
                 case 2:
-                    TxtDensity.Text = string.Format("{0:F0}", currentFlat.Density);
+                    TxtDensity.Text = string.Format("{0:F}", currentFlat.Density);
                     break;
             }
         }
@@ -606,11 +616,11 @@ namespace QuotationForm
         {
             sQLQuery.GetProducts();
 
-            materialList = new List<Material>(sQLQuery.ProductList);
+            productList = new List<Material>(sQLQuery.ProductList);
 
             ComboBoxProducts.DisplayMember = "Name";
             ComboBoxProducts.ValueMember = "Id";
-            ComboBoxProducts.DataSource = materialList;
+            ComboBoxProducts.DataSource = productList;
             ComboBoxProducts.SelectedItem = ComboBoxProducts.Items[ComboBoxProducts.Items.Count - 1];
         }
 
@@ -623,6 +633,7 @@ namespace QuotationForm
         public string ShowMyDialogBox()
         {
             Form2 testDialog = new Form2();
+            testDialog.StartPosition = FormStartPosition.CenterParent;
             testDialog.Text = "Enter Job Name:";
             var name = "blank";
             // Show testDialog as a modal dialog and determine if DialogResult = OK.
@@ -669,19 +680,242 @@ namespace QuotationForm
 
             DataGridMaterials.Columns["SubTotal"].DefaultCellStyle.Format = "C2";
             DataGridMaterials.Columns["Price_Per_Piece"].DefaultCellStyle.Format = "C2";
-            DataGridMaterials.Columns["Subtotal"].HeaderText = "Sub Total";
-            DataGridMaterials.Columns["Price_Per_Piece"].HeaderText = "Price per Piece";
-
+            DataGridMaterials.Columns["Subtotal"].HeaderText = "SubTotal";
+            DataGridMaterials.Columns["Price_Per_Piece"].HeaderText = "Unit Price";
+            DataGridMaterials.Columns["Qty"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            DataGridMaterials.Columns["Qty"].ReadOnly = true;
+            DataGridMaterials.Columns["Name"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            DataGridMaterials.Columns["Name"].ReadOnly = true;
+            DataGridMaterials.Columns["SubTotal"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            DataGridMaterials.Columns["SubTotal"].ReadOnly = true;
+            DataGridMaterials.Columns["Price_Per_Piece"].ReadOnly = true;
+            DataGridMaterials.Columns["Price_Per_Piece"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            DataGridMaterials.Columns["Name"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            DataGridMaterials.Columns["Qty"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            DataGridMaterials.Columns["SubTotal"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            DataGridMaterials.Columns["Price_Per_Piece"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
 
             DataGridMaterials.Columns["Material_Cost"].Visible = false;
+            DataGridMaterials.Columns["Material_Cost"].Visible = false;
+            //DataGridMaterials.Columns["Price_Per_Piece"].Visible = false;
             DataGridMaterials.Columns["Setup_Hr"].Visible = false;
             DataGridMaterials.Columns["Setup_Cost"].Visible = false;
             DataGridMaterials.Columns["Operation_Cost"].Visible = false;
             DataGridMaterials.Columns["Operation_Hr"].Visible = false;
             DataGridMaterials.Columns["Markup"].Visible = false;
-            //DataGridMaterials.Columns["Id"]
+            DataGridMaterials.Columns["Id"].Visible = false;
+            DataGridMaterials.Columns["Grp_Id"].Visible = false;
+            
 
             DataGridMaterials.ClearSelection();
+            DisplayTotal();
+            
+        }
+
+        private void DisplayTotal()
+        {
+            sQLQuery.CalculateTotal();
+            //var culture = new CultureInfo("en-AU");
+            TxtTotal.Text = string.Format("{0:C2}", sQLQuery.Total);
+        }
+
+        private bool AreAllFilledOut()
+        {
+            return (TxtQtyQuote.Text.Length > 0 && TxtMaterialCost.Text.Length > 0
+                && TxtMarkup.Text.Length > 0 && TxtSetupCost.Text.Length > 0
+                && TxtSetupHr.Text.Length > 0 && TxtOptnCost.Text.Length > 0
+                && TxtOptnHr.Text.Length > 0 && TxtName.Text.Length > 0) ? true : false;
+        }
+
+        private void UpdateCurrentMaterial()
+        {
+            if (DataGridMaterials.SelectedRows.Count > 0)
+            {
+                try
+                {
+                    currentMaterial = new Material
+                    {
+                        Name = TxtName.Text,
+                        Qty = double.Parse(TxtQtyQuote.Text),
+                        Material_Cost = double.Parse(TxtMaterialCost.Text, NumberStyles.Any),
+                        Markup = double.Parse(TxtMarkup.Text),
+                        Setup_Cost = double.Parse(TxtSetupCost.Text, NumberStyles.Any),
+                        Setup_Hr = double.Parse(TxtSetupHr.Text),
+                        Operation_Cost = double.Parse(TxtOptnCost.Text, NumberStyles.Any),
+                        Operation_Hr = double.Parse(TxtOptnHr.Text),
+                        Grp_Id = ((Material)ComboBoxProducts.SelectedItem).Id,
+                        Id = ((Material)DataGridMaterials.SelectedRows[0].DataBoundItem).Id
+                    };
+                }
+                catch(Exception ex)
+                {
+                    MessageBox.Show("Error:" + ex.Message + ex.Source);
+                }
+            }
+            else
+            {
+                Print("walang selected");
+                try
+                {
+                    currentMaterial = new Material
+                    {
+                        Name = TxtName.Text,
+                        Qty = double.Parse(TxtQtyQuote.Text),
+                        Material_Cost = double.Parse(TxtMaterialCost.Text, NumberStyles.Any),
+                        Markup = double.Parse(TxtMarkup.Text),
+                        Setup_Cost = double.Parse(TxtSetupCost.Text, NumberStyles.Any),
+                        Setup_Hr = double.Parse(TxtSetupHr.Text),
+                        Operation_Cost = double.Parse(TxtOptnCost.Text, NumberStyles.Any),
+                        Operation_Hr = double.Parse(TxtOptnHr.Text),
+                        Grp_Id = ((Material)ComboBoxProducts.SelectedItem).Id,
+                        Id = 0
+                    };
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error:" + ex.Message + ex.Source);
+                }
+            }
+            Print("Qty" + currentMaterial.Qty.ToString());
+        }
+
+        private void DataGridMaterials_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                try
+                {
+                    currentMaterial = DataGridMaterials.SelectedRows[0].DataBoundItem as Material;
+                    //oldname = selectedmaterial.name;
+                    TxtName.Text = currentMaterial.Name;
+                    TxtMaterialCost.Text = string.Format("{0:C2}", currentMaterial.Material_Cost);
+                    TxtSetupCost.Text = string.Format("{0:C2}", currentMaterial.Setup_Cost);
+                    TxtSetupHr.Text = currentMaterial.Setup_Hr.ToString();
+                    TxtQtyQuote.Text = currentMaterial.Qty.ToString();
+                    TxtOptnCost.Text = string.Format("{0:C2}", currentMaterial.Operation_Cost);
+                    TxtOptnHr.Text = currentMaterial.Operation_Hr.ToString();
+                    TxtMarkup.Text = currentMaterial.Markup.ToString();
+                    //UpdateCurrentMaterial();
+                    //lockmodify = false;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error:" + ex.Message + " - " + ex.Source);
+                }
+            }
+        }
+
+        private void TxtName_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TxtUnitPriceQuote_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TxtSetupCost_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TxtSetupHr_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TxtOptnCost_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TxtOptnHr_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TxtQtyQuote_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TxtMarkup_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void BtnNewMaterial_Click(object sender, EventArgs e)
+        {
+            TxtName.Clear();
+            TxtQtyQuote.Clear();
+            TxtMaterialCost.Clear();
+            TxtMarkup.Clear();
+            TxtSetupCost.Clear();
+            TxtSetupHr.Clear();
+            TxtOptnCost.Clear();
+            TxtOptnHr.Clear();
+            TxtQtyQuote.Text = "1";
+            TxtSetupCost.Text = string.Format("{0:C2}", 50);
+            TxtOptnCost.Text = string.Format("{0:C2}", 75);
+            DataGridMaterials.ClearSelection();
+            //UpdateCurrentMaterial();
+
+            //lockAdd = false;
+            //lockModify = true;
+        }
+
+        private void BtnSaveMaterial_Click(object sender, EventArgs e)
+        {
+            //if(AreAllFilledOut())
+            //{
+            //    UpdateCurrentMaterial();
+            //    sQLQuery.AddMaterial(currentMaterial);
+            //    DisplayQuoteMaterials();
+            //}
+            //else
+            //{
+            //    MessageBox.Show("Missing Fields");
+            //}
+            if (AreAllFilledOut())
+            {
+                UpdateCurrentMaterial();
+                if (currentMaterial.Id == 0)
+                {
+                    sQLQuery.AddMaterial(currentMaterial);
+                }
+                else
+                {
+                    sQLQuery.ModifyMaterial(currentMaterial);
+                }
+                DisplayQuoteMaterials();
+            }
+            else
+            {
+                MessageBox.Show("Missing Fields");
+            }
+
+        }
+
+        private void BtnDeleteMaterial_Click(object sender, EventArgs e)
+        {
+            sQLQuery.DeleteMaterial(currentMaterial.Id);
+
+            DisplayQuoteMaterials();
+        }
+
+        private void DataGridMaterials_KeyDown(object sender, KeyEventArgs e)
+        {
+            switch(e.KeyData & Keys.KeyCode)
+            {
+                case Keys.Up:
+                case Keys.Down:
+                    e.Handled = true;
+                    e.SuppressKeyPress = true;
+                    break;
+                default:
+                    break;
+            }
         }
 
     }

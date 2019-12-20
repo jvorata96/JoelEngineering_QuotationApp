@@ -57,15 +57,31 @@
             this.BtnDeleteProduct = new System.Windows.Forms.Button();
             this.label12 = new System.Windows.Forms.Label();
             this.DataGridMaterials = new System.Windows.Forms.DataGridView();
+            this.TxtName = new System.Windows.Forms.TextBox();
+            this.TxtSetupCost = new System.Windows.Forms.TextBox();
+            this.TxtOptnCost = new System.Windows.Forms.TextBox();
+            this.TxtMaterialCost = new System.Windows.Forms.TextBox();
+            this.TxtSetupHr = new System.Windows.Forms.TextBox();
+            this.TxtOptnHr = new System.Windows.Forms.TextBox();
+            this.TxtQtyQuote = new System.Windows.Forms.TextBox();
+            this.BtnNewMaterial = new System.Windows.Forms.Button();
+            this.BtnDeleteMaterial = new System.Windows.Forms.Button();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
+            this.label20 = new System.Windows.Forms.Label();
+            this.label21 = new System.Windows.Forms.Label();
+            this.TxtMarkup = new System.Windows.Forms.TextBox();
+            this.TxtTotal = new System.Windows.Forms.TextBox();
+            this.BtnSaveMaterial = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.textBox6 = new System.Windows.Forms.TextBox();
-            this.textBox7 = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.label22 = new System.Windows.Forms.Label();
+            this.label23 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridMaterials)).BeginInit();
             this.SuspendLayout();
             // 
@@ -129,7 +145,7 @@
             // 
             // BtnSaveRawMaterial
             // 
-            this.BtnSaveRawMaterial.Location = new System.Drawing.Point(80, 466);
+            this.BtnSaveRawMaterial.Location = new System.Drawing.Point(81, 464);
             this.BtnSaveRawMaterial.Margin = new System.Windows.Forms.Padding(4);
             this.BtnSaveRawMaterial.Name = "BtnSaveRawMaterial";
             this.BtnSaveRawMaterial.Size = new System.Drawing.Size(100, 28);
@@ -140,7 +156,7 @@
             // 
             // BtnDeleteRawMaterial
             // 
-            this.BtnDeleteRawMaterial.Location = new System.Drawing.Point(80, 502);
+            this.BtnDeleteRawMaterial.Location = new System.Drawing.Point(81, 499);
             this.BtnDeleteRawMaterial.Margin = new System.Windows.Forms.Padding(4);
             this.BtnDeleteRawMaterial.Name = "BtnDeleteRawMaterial";
             this.BtnDeleteRawMaterial.Size = new System.Drawing.Size(100, 28);
@@ -326,21 +342,23 @@
             // 
             // ComboBoxProducts
             // 
+            this.ComboBoxProducts.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.ComboBoxProducts.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.ComboBoxProducts.FormattingEnabled = true;
             this.ComboBoxProducts.Items.AddRange(new object[] {
             "Rods",
             "Hollow Rods",
             "Flats"});
-            this.ComboBoxProducts.Location = new System.Drawing.Point(326, 14);
+            this.ComboBoxProducts.Location = new System.Drawing.Point(326, 42);
             this.ComboBoxProducts.Margin = new System.Windows.Forms.Padding(4);
             this.ComboBoxProducts.Name = "ComboBoxProducts";
-            this.ComboBoxProducts.Size = new System.Drawing.Size(228, 24);
+            this.ComboBoxProducts.Size = new System.Drawing.Size(255, 24);
             this.ComboBoxProducts.TabIndex = 24;
             this.ComboBoxProducts.SelectedIndexChanged += new System.EventHandler(this.ComboBoxProducts_SelectedIndexChanged);
             // 
             // BtnAddProduct
             // 
-            this.BtnAddProduct.Location = new System.Drawing.Point(601, 14);
+            this.BtnAddProduct.Location = new System.Drawing.Point(622, 42);
             this.BtnAddProduct.Margin = new System.Windows.Forms.Padding(4);
             this.BtnAddProduct.Name = "BtnAddProduct";
             this.BtnAddProduct.Size = new System.Drawing.Size(100, 28);
@@ -351,7 +369,7 @@
             // 
             // BtnDeleteProduct
             // 
-            this.BtnDeleteProduct.Location = new System.Drawing.Point(601, 45);
+            this.BtnDeleteProduct.Location = new System.Drawing.Point(734, 42);
             this.BtnDeleteProduct.Margin = new System.Windows.Forms.Padding(4);
             this.BtnDeleteProduct.Name = "BtnDeleteProduct";
             this.BtnDeleteProduct.Size = new System.Drawing.Size(100, 28);
@@ -363,7 +381,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(562, 17);
+            this.label12.Location = new System.Drawing.Point(583, 45);
             this.label12.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(31, 17);
@@ -378,99 +396,288 @@
             this.DataGridMaterials.RowHeadersVisible = false;
             this.DataGridMaterials.RowHeadersWidth = 51;
             this.DataGridMaterials.RowTemplate.Height = 24;
-            this.DataGridMaterials.Size = new System.Drawing.Size(375, 301);
+            this.DataGridMaterials.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.DataGridMaterials.Size = new System.Drawing.Size(508, 324);
             this.DataGridMaterials.TabIndex = 28;
+            this.DataGridMaterials.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridMaterials_CellClick);
+            this.DataGridMaterials.KeyDown += new System.Windows.Forms.KeyEventHandler(this.DataGridMaterials_KeyDown);
+            // 
+            // TxtName
+            // 
+            this.TxtName.Location = new System.Drawing.Point(326, 425);
+            this.TxtName.Margin = new System.Windows.Forms.Padding(4);
+            this.TxtName.Name = "TxtName";
+            this.TxtName.Size = new System.Drawing.Size(104, 22);
+            this.TxtName.TabIndex = 29;
+            this.TxtName.TextChanged += new System.EventHandler(this.TxtName_TextChanged);
+            // 
+            // TxtSetupCost
+            // 
+            this.TxtSetupCost.Location = new System.Drawing.Point(461, 425);
+            this.TxtSetupCost.Margin = new System.Windows.Forms.Padding(4);
+            this.TxtSetupCost.Name = "TxtSetupCost";
+            this.TxtSetupCost.Size = new System.Drawing.Size(104, 22);
+            this.TxtSetupCost.TabIndex = 31;
+            this.TxtSetupCost.TextChanged += new System.EventHandler(this.TxtSetupCost_TextChanged);
+            // 
+            // TxtOptnCost
+            // 
+            this.TxtOptnCost.Location = new System.Drawing.Point(597, 425);
+            this.TxtOptnCost.Margin = new System.Windows.Forms.Padding(4);
+            this.TxtOptnCost.Name = "TxtOptnCost";
+            this.TxtOptnCost.Size = new System.Drawing.Size(104, 22);
+            this.TxtOptnCost.TabIndex = 33;
+            this.TxtOptnCost.TextChanged += new System.EventHandler(this.TxtOptnCost_TextChanged);
+            // 
+            // TxtMaterialCost
+            // 
+            this.TxtMaterialCost.Location = new System.Drawing.Point(326, 486);
+            this.TxtMaterialCost.Margin = new System.Windows.Forms.Padding(4);
+            this.TxtMaterialCost.Name = "TxtMaterialCost";
+            this.TxtMaterialCost.Size = new System.Drawing.Size(104, 22);
+            this.TxtMaterialCost.TabIndex = 30;
+            this.TxtMaterialCost.TextChanged += new System.EventHandler(this.TxtUnitPriceQuote_TextChanged);
+            // 
+            // TxtSetupHr
+            // 
+            this.TxtSetupHr.Location = new System.Drawing.Point(461, 486);
+            this.TxtSetupHr.Margin = new System.Windows.Forms.Padding(4);
+            this.TxtSetupHr.Name = "TxtSetupHr";
+            this.TxtSetupHr.Size = new System.Drawing.Size(104, 22);
+            this.TxtSetupHr.TabIndex = 32;
+            this.TxtSetupHr.TextChanged += new System.EventHandler(this.TxtSetupHr_TextChanged);
+            // 
+            // TxtOptnHr
+            // 
+            this.TxtOptnHr.Location = new System.Drawing.Point(597, 486);
+            this.TxtOptnHr.Margin = new System.Windows.Forms.Padding(4);
+            this.TxtOptnHr.Name = "TxtOptnHr";
+            this.TxtOptnHr.Size = new System.Drawing.Size(104, 22);
+            this.TxtOptnHr.TabIndex = 34;
+            this.TxtOptnHr.TextChanged += new System.EventHandler(this.TxtOptnHr_TextChanged);
+            // 
+            // TxtQtyQuote
+            // 
+            this.TxtQtyQuote.Location = new System.Drawing.Point(730, 425);
+            this.TxtQtyQuote.Margin = new System.Windows.Forms.Padding(4);
+            this.TxtQtyQuote.Name = "TxtQtyQuote";
+            this.TxtQtyQuote.Size = new System.Drawing.Size(104, 22);
+            this.TxtQtyQuote.TabIndex = 35;
+            this.TxtQtyQuote.TextChanged += new System.EventHandler(this.TxtQtyQuote_TextChanged);
+            // 
+            // BtnNewMaterial
+            // 
+            this.BtnNewMaterial.Location = new System.Drawing.Point(861, 282);
+            this.BtnNewMaterial.Margin = new System.Windows.Forms.Padding(4);
+            this.BtnNewMaterial.Name = "BtnNewMaterial";
+            this.BtnNewMaterial.Size = new System.Drawing.Size(104, 28);
+            this.BtnNewMaterial.TabIndex = 38;
+            this.BtnNewMaterial.Text = "New";
+            this.BtnNewMaterial.UseVisualStyleBackColor = true;
+            this.BtnNewMaterial.Click += new System.EventHandler(this.BtnNewMaterial_Click);
+            // 
+            // BtnDeleteMaterial
+            // 
+            this.BtnDeleteMaterial.Location = new System.Drawing.Point(859, 368);
+            this.BtnDeleteMaterial.Margin = new System.Windows.Forms.Padding(4);
+            this.BtnDeleteMaterial.Name = "BtnDeleteMaterial";
+            this.BtnDeleteMaterial.Size = new System.Drawing.Size(104, 28);
+            this.BtnDeleteMaterial.TabIndex = 39;
+            this.BtnDeleteMaterial.Text = "Delete";
+            this.BtnDeleteMaterial.UseVisualStyleBackColor = true;
+            this.BtnDeleteMaterial.Click += new System.EventHandler(this.BtnDeleteMaterial_Click);
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(330, 451);
+            this.label13.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(99, 17);
+            this.label13.TabIndex = 38;
+            this.label13.Text = "Material Name";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(477, 451);
+            this.label14.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(76, 17);
+            this.label14.TabIndex = 39;
+            this.label14.Text = "Setup $/Hr";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(750, 451);
+            this.label15.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(61, 17);
+            this.label15.TabIndex = 40;
+            this.label15.Text = "Quantity";
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(893, 112);
+            this.label16.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(40, 17);
+            this.label16.TabIndex = 41;
+            this.label16.Text = "Total";
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(754, 512);
+            this.label17.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(55, 17);
+            this.label17.TabIndex = 42;
+            this.label17.Text = "Markup";
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(604, 512);
+            this.label18.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(90, 17);
+            this.label18.TabIndex = 43;
+            this.label18.Text = "Operation Hr";
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(599, 451);
+            this.label19.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(102, 17);
+            this.label19.TabIndex = 44;
+            this.label19.Text = "Operation $/Hr";
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(335, 512);
+            this.label20.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(90, 17);
+            this.label20.TabIndex = 45;
+            this.label20.Text = "Material Cost";
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(479, 512);
+            this.label21.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(68, 17);
+            this.label21.TabIndex = 46;
+            this.label21.Text = "Setup  Hr";
+            // 
+            // TxtMarkup
+            // 
+            this.TxtMarkup.Location = new System.Drawing.Point(730, 486);
+            this.TxtMarkup.Margin = new System.Windows.Forms.Padding(4);
+            this.TxtMarkup.Name = "TxtMarkup";
+            this.TxtMarkup.Size = new System.Drawing.Size(104, 22);
+            this.TxtMarkup.TabIndex = 36;
+            this.TxtMarkup.TextChanged += new System.EventHandler(this.TxtMarkup_TextChanged);
+            // 
+            // TxtTotal
+            // 
+            this.TxtTotal.Location = new System.Drawing.Point(859, 133);
+            this.TxtTotal.Margin = new System.Windows.Forms.Padding(4);
+            this.TxtTotal.Name = "TxtTotal";
+            this.TxtTotal.ReadOnly = true;
+            this.TxtTotal.Size = new System.Drawing.Size(104, 22);
+            this.TxtTotal.TabIndex = 48;
+            // 
+            // BtnSaveMaterial
+            // 
+            this.BtnSaveMaterial.Location = new System.Drawing.Point(859, 325);
+            this.BtnSaveMaterial.Margin = new System.Windows.Forms.Padding(4);
+            this.BtnSaveMaterial.Name = "BtnSaveMaterial";
+            this.BtnSaveMaterial.Size = new System.Drawing.Size(104, 28);
+            this.BtnSaveMaterial.TabIndex = 37;
+            this.BtnSaveMaterial.Text = "Save";
+            this.BtnSaveMaterial.UseVisualStyleBackColor = true;
+            this.BtnSaveMaterial.Click += new System.EventHandler(this.BtnSaveMaterial_Click);
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(326, 402);
+            this.textBox1.Location = new System.Drawing.Point(859, 425);
             this.textBox1.Margin = new System.Windows.Forms.Padding(4);
             this.textBox1.Name = "textBox1";
+            this.textBox1.ReadOnly = true;
             this.textBox1.Size = new System.Drawing.Size(104, 22);
-            this.textBox1.TabIndex = 29;
+            this.textBox1.TabIndex = 49;
+            this.textBox1.Visible = false;
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(461, 402);
+            this.textBox2.Location = new System.Drawing.Point(859, 486);
             this.textBox2.Margin = new System.Windows.Forms.Padding(4);
             this.textBox2.Name = "textBox2";
+            this.textBox2.ReadOnly = true;
             this.textBox2.Size = new System.Drawing.Size(104, 22);
-            this.textBox2.TabIndex = 30;
+            this.textBox2.TabIndex = 50;
+            this.textBox2.Visible = false;
             // 
-            // textBox3
+            // label22
             // 
-            this.textBox3.Location = new System.Drawing.Point(597, 402);
-            this.textBox3.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(104, 22);
-            this.textBox3.TabIndex = 31;
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(879, 451);
+            this.label22.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(65, 17);
+            this.label22.TabIndex = 51;
+            this.label22.Text = "Unit Cost";
+            this.label22.Visible = false;
             // 
-            // textBox4
+            // label23
             // 
-            this.textBox4.Location = new System.Drawing.Point(326, 466);
-            this.textBox4.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(104, 22);
-            this.textBox4.TabIndex = 32;
-            // 
-            // textBox5
-            // 
-            this.textBox5.Location = new System.Drawing.Point(461, 466);
-            this.textBox5.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(104, 22);
-            this.textBox5.TabIndex = 33;
-            // 
-            // textBox6
-            // 
-            this.textBox6.Location = new System.Drawing.Point(597, 466);
-            this.textBox6.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(104, 22);
-            this.textBox6.TabIndex = 34;
-            // 
-            // textBox7
-            // 
-            this.textBox7.Location = new System.Drawing.Point(326, 519);
-            this.textBox7.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(104, 22);
-            this.textBox7.TabIndex = 35;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(461, 516);
-            this.button1.Margin = new System.Windows.Forms.Padding(4);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(104, 28);
-            this.button1.TabIndex = 36;
-            this.button1.Text = "New";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(597, 516);
-            this.button2.Margin = new System.Windows.Forms.Padding(4);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(104, 28);
-            this.button2.TabIndex = 37;
-            this.button2.Text = "Delete";
-            this.button2.UseVisualStyleBackColor = true;
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(881, 512);
+            this.label23.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(65, 17);
+            this.label23.TabIndex = 52;
+            this.label23.Text = "SubTotal";
+            this.label23.Visible = false;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1067, 554);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.textBox7);
-            this.Controls.Add(this.textBox6);
-            this.Controls.Add(this.textBox5);
-            this.Controls.Add(this.textBox4);
-            this.Controls.Add(this.textBox3);
+            this.ClientSize = new System.Drawing.Size(1001, 554);
+            this.Controls.Add(this.label23);
+            this.Controls.Add(this.label22);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.BtnSaveMaterial);
+            this.Controls.Add(this.TxtTotal);
+            this.Controls.Add(this.TxtMarkup);
+            this.Controls.Add(this.label21);
+            this.Controls.Add(this.label20);
+            this.Controls.Add(this.label19);
+            this.Controls.Add(this.label18);
+            this.Controls.Add(this.label17);
+            this.Controls.Add(this.label16);
+            this.Controls.Add(this.label15);
+            this.Controls.Add(this.label14);
+            this.Controls.Add(this.label13);
+            this.Controls.Add(this.BtnDeleteMaterial);
+            this.Controls.Add(this.BtnNewMaterial);
+            this.Controls.Add(this.TxtQtyQuote);
+            this.Controls.Add(this.TxtOptnHr);
+            this.Controls.Add(this.TxtSetupHr);
+            this.Controls.Add(this.TxtMaterialCost);
+            this.Controls.Add(this.TxtOptnCost);
+            this.Controls.Add(this.TxtSetupCost);
+            this.Controls.Add(this.TxtName);
             this.Controls.Add(this.DataGridMaterials);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.BtnDeleteProduct);
@@ -541,15 +748,31 @@
         private System.Windows.Forms.Button BtnDeleteProduct;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.DataGridView DataGridMaterials;
+        private System.Windows.Forms.TextBox TxtName;
+        private System.Windows.Forms.TextBox TxtSetupCost;
+        private System.Windows.Forms.TextBox TxtOptnCost;
+        private System.Windows.Forms.TextBox TxtMaterialCost;
+        private System.Windows.Forms.TextBox TxtSetupHr;
+        private System.Windows.Forms.TextBox TxtOptnHr;
+        private System.Windows.Forms.TextBox TxtQtyQuote;
+        private System.Windows.Forms.Button BtnNewMaterial;
+        private System.Windows.Forms.Button BtnDeleteMaterial;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.TextBox TxtMarkup;
+        private System.Windows.Forms.TextBox TxtTotal;
+        private System.Windows.Forms.Button BtnSaveMaterial;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.TextBox textBox5;
-        private System.Windows.Forms.TextBox textBox6;
-        private System.Windows.Forms.TextBox textBox7;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.Label label23;
     }
 }
 

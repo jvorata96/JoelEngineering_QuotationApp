@@ -19,11 +19,13 @@ namespace QuotationApp__Clean_Version_
 
         public List<Rod> RodList { get; set; }
         public List<Flat> FlatList { get; set; }
-        public List <HollowRod> HollowRodList { get; set; }
+        public List<HollowRod> HollowRodList { get; set; }
 
         //***************QUOTATION FIELDS***************//
         public List<Material> ProductList { get; set; }
         public List<Material> MaterialList { get; set; }
+
+        public double Total { get; private set; }
 
         public SQLQuery()
         {
@@ -439,7 +441,7 @@ namespace QuotationApp__Clean_Version_
             }
         }
 
-        public void DeleteProduct(float id)
+        public void DeleteProduct(double id)
         {
             try
             {
@@ -466,7 +468,7 @@ namespace QuotationApp__Clean_Version_
             }
         }
 
-        public void GetMaterials(float id)
+        public void GetMaterials(double id)
         {
             try
             {
@@ -492,21 +494,15 @@ namespace QuotationApp__Clean_Version_
                                 Material material = new Material
                                 {
                                     Name = reader.GetString(0),
-                                    //Material_Cost = (float)reader.GetDouble(1),
-                                    Material_Cost = reader.IsDBNull(1) ? 0 : (float)reader.GetDouble(1),
-                                    //Setup_Hr = (float)reader.GetDouble(2),
-                                    //Setup_Cost = (UInt32)reader.GetDouble(3),
-                                    //Operation_Hr = (float)reader.GetDouble(4),
-                                    //Operation_Cost = (UInt32)reader.GetDouble(5),
-                                    //Markup = (float)reader.GetDouble(6),
-                                    Setup_Hr = reader.IsDBNull(2) ? 0 : (float)reader.GetDouble(2),
-                                    Setup_Cost = reader.IsDBNull(3) ? 0 : (UInt32)reader.GetDouble(3),
-                                    Operation_Hr = reader.IsDBNull(4) ? 0 : (float)reader.GetDouble(4),
-                                    Operation_Cost = reader.IsDBNull(5) ? 0 : (UInt32)reader.GetDouble(5),
-                                    Markup = reader.IsDBNull(6) ? 0 : (float)reader.GetDouble(6),
-                                    Qty = reader.IsDBNull(9) ? 0 : (UInt32)reader.GetDouble(9),
-                                    Id = (float)reader.GetInt32(7),
-                                    Grp_Id = reader.IsDBNull(8) ? 0 : (float)reader.GetInt32(8)
+                                    Material_Cost = reader.IsDBNull(1) ? 0 : (double)reader.GetDouble(1),
+                                    Setup_Hr = reader.IsDBNull(2) ? 0 : (double)reader.GetDouble(2),
+                                    Setup_Cost = reader.IsDBNull(3) ? 0 : (double)reader.GetDouble(3),
+                                    Operation_Hr = reader.IsDBNull(4) ? 0 : (double)reader.GetDouble(4),
+                                    Operation_Cost = reader.IsDBNull(5) ? 0 : (double)reader.GetDouble(5),
+                                    Markup = reader.IsDBNull(6) ? 0 : (double)reader.GetDouble(6),
+                                    Qty = reader.IsDBNull(9) ? 0 : (double)reader.GetDouble(9),
+                                    Id = (double)reader.GetInt32(7),
+                                    Grp_Id = reader.IsDBNull(8) ? 0 : (double)reader.GetInt32(8)
                                 };
 
                                 material.SetSubTotal();
@@ -524,6 +520,117 @@ namespace QuotationApp__Clean_Version_
             {
                 MessageBox.Show(ex.Message + ex.Source);
             }
+        }
+
+        public void AddMaterial(Material material)
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
+                {
+                    connection.Open();
+
+                    StringBuilder sb = new StringBuilder();
+                    sb.Append("INSERT INTO Sheet1$ VALUES ('");
+                    sb.Append(material.Name + "', ");
+                    sb.Append(material.Material_Cost + ", ");
+                    sb.Append(material.Setup_Hr + ", ");
+                    sb.Append(material.Setup_Cost + ", ");
+                    sb.Append(material.Operation_Hr + ", ");
+                    sb.Append(material.Operation_Cost + ", ");
+                    sb.Append(material.Markup + ", ");
+                    sb.Append(material.Grp_Id + ", ");
+                    sb.Append(material.Qty + ");");
+                    String sql = sb.ToString();
+
+                    Console.WriteLine(sb.ToString());
+
+                    using (SqlCommand command = new SqlCommand(sql, connection))
+                    {
+                        command.ExecuteNonQuery();
+                    }
+
+                }
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show(ex.Message + ex.Source);
+            }
+        }
+
+        public void DeleteMaterial(double id)
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
+                {
+                    connection.Open();
+
+                    StringBuilder sb = new StringBuilder();
+                    sb.Append("DELETE FROM Sheet1$ WHERE ID=" + id.ToString());
+                    String sql = sb.ToString();
+
+                    Console.WriteLine(sb.ToString());
+
+                    using (SqlCommand command = new SqlCommand(sql, connection))
+                    {
+                        command.ExecuteNonQuery();
+                    }
+
+                }
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show(ex.Message + ex.Source);
+            }
+        }
+
+        public void ModifyMaterial(Material material)
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
+                {
+                    connection.Open();
+
+                    StringBuilder sb = new StringBuilder();
+                    sb.Append("UPDATE Sheet1$ ");
+                    sb.Append("SET [PRODUCT NAME/WORKS]='" + material.Name + "', ");
+                    sb.Append("[PRICE MTL]=" + material.Material_Cost + ", ");
+                    sb.Append("[SET-UP HR]=" + material.Setup_Hr + ", ");
+                    sb.Append("[SET $/HR]=" + material.Setup_Cost + ", ");
+                    sb.Append("[OPTN time]=" + material.Operation_Hr + ", ");
+                    sb.Append("[OPTN$/HR]=" + material.Operation_Cost + ", ");
+                    sb.Append("[MARK UP]=" + material.Markup + ", ");
+                    sb.Append("[GRP_ID]=" + material.Grp_Id + ", ");
+                    sb.Append("[QTY]=" + material.Qty + " ");
+                    sb.Append("WHERE [ID]=" + material.Id + ";");
+                    String sql = sb.ToString();
+
+                    Console.WriteLine(sb.ToString());
+
+                    using (SqlCommand command = new SqlCommand(sql, connection))
+                    {
+                        command.ExecuteNonQuery();
+                    }
+
+                }
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show(ex.Message + ex.Source);
+            }
+        }
+
+        public void CalculateTotal()
+        {
+            double tempTotal = 0;
+            foreach (var mat in MaterialList)
+            {
+                tempTotal += mat.SubTotal;
+            }
+
+            Total = tempTotal;
         }
     }
 }

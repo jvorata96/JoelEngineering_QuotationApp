@@ -8,25 +8,25 @@ namespace QuotationApp__Clean_Version_
 {
     public class Material
     {
-        public UInt32 Qty { get; set; }
+        public double Qty { get; set; }
         public string Name { get; set; }
-        public float Material_Cost { get; set; }
-        public float Setup_Hr { get; set; }
-        public UInt32 Setup_Cost { get; set; }
-        public UInt32 Operation_Cost { get; set; }
-        public float Operation_Hr { get; set; }
-        public float Markup { get; set; }
-        public float Id { get; set; }
-        public float Grp_Id { get; set; }
+        public double Material_Cost { get; set; }
+        public double Setup_Hr { get; set; }
+        public double Setup_Cost { get; set; }
+        public double Operation_Cost { get; set; }
+        public double Operation_Hr { get; set; }
+        public double Markup { get; set; }
+        public double Id { get; set; }
+        public double Grp_Id { get; set; }
 
-        public float Price_Per_Piece { get; set; }
+        public double Price_Per_Piece { get; set; }
 
         public void SetPricePerPiece()
         {
             Price_Per_Piece = SubTotal / Qty;
         }
 
-        public float SubTotal { get; set; }
+        public double SubTotal { get; set; }
 
         public void SetSubTotal()
         {
@@ -35,8 +35,8 @@ namespace QuotationApp__Clean_Version_
 
         public Material()
         {
-            Name = "untitled";
-            Qty = 1;
+            //Name = "untitled";
+            //Qty = 1;
         }
 
     }
