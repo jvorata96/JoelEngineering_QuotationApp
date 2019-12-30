@@ -71,23 +71,36 @@ namespace QuotationForm
                     break;
                 case 0:
                     Print("Rods");
-                    label5.Text = "Diameter";
-                    label5.Location = new Point(118, 174);
+                    label5.Text = "Length";
+                    label5.Location = new Point(162, 195);
+
+                    label6.Text = "Diameter";
+                    label6.Location = new Point(72, 195);
 
                     sQLQuery.GetRods();
                     rawMaterials = new List<RawMaterial>(sQLQuery.RodList);
 
                     label11.Visible = false;
                     TxtThickness.Visible = false;
+
+                    TxtLength.Location = new Point(145, 172);
+
                     break;
                 case 1:
                     Print("Hollows");
                     label11.Visible = true;
-                    label11.Text = "Inner Diameter";
-                    label11.Location = new Point(60,222);
-                    label5.Text = "Outer Diameter";
-                    label5.Location = new Point(105, 174);
+                    label11.Text = "Length";
+                    label11.Location = new Point(120,241);
+
+                    label5.Text = "Inner Diameter";
+                    label5.Location = new Point(147, 195);
+                    
+                    label6.Text = "Outer Diameter";
+                    label6.Location = new Point(58, 195);
                     TxtThickness.Visible = true;
+
+                    TxtThickness.Location = new Point(145, 172);
+                    TxtLength.Location = new Point(99, 217);
 
                     sQLQuery.GetHollowRods();
                     rawMaterials = new List<RawMaterial>(sQLQuery.HollowRodList);
@@ -96,10 +109,15 @@ namespace QuotationForm
                 case 2:
                     Print("Flats");
                     label11.Visible = true;
-                    label11.Text = "Thickness";
-                    label11.Location = new Point(70, 222);
+                    label11.Text = "Length";
+                    label11.Location = new Point(120, 241);
+
                     label5.Text = "Width";
-                    label5.Location = new Point(126, 174);
+                    label5.Location = new Point(167, 195);
+                    TxtThickness.Visible = true;
+
+                    label6.Text = "Thickness";
+                    label6.Location = new Point(70, 195);
                     TxtThickness.Visible = true;
 
                     sQLQuery.GetFlats();
@@ -134,7 +152,8 @@ namespace QuotationForm
                     currentRod = new Rod("Blank", 1, 1, 1, 1, 1);
                     currentFlat = new Flat("Blank", 1, 1, 1, 1, 1, 1);
                     currentHollowRod = new HollowRod("BlankHollow", 1, 1, 1, 1, 1, 1);
-                    TxtRawName.Clear();
+                    TxtRawName.Text = "Enter Material Name Here";
+                    //TxtRawName.Clear();
                     TxtDensity.Clear();
                     TxtPricePerKilo.Clear();
                     TxtQty.Clear();
@@ -689,6 +708,7 @@ namespace QuotationForm
             DataGridMaterials.Columns["Qty"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             DataGridMaterials.Columns["Qty"].ReadOnly = true;
             DataGridMaterials.Columns["Name"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            DataGridMaterials.Columns["Name"].HeaderText = "Material Name";
             DataGridMaterials.Columns["Name"].ReadOnly = true;
             DataGridMaterials.Columns["SubTotal"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             DataGridMaterials.Columns["SubTotal"].ReadOnly = true;
@@ -863,6 +883,11 @@ namespace QuotationForm
             TxtQtyQuote.Text = "1";
             TxtSetupCost.Text = string.Format("{0:C2}", 50);
             TxtOptnCost.Text = string.Format("{0:C2}", 75);
+            TxtSetupHr.Text = "0";
+            TxtOptnHr.Text = "0";
+            TxtMaterialCost.Text = "1";
+            TxtMarkup.Text = "0";
+            TxtName.Text = "Enter name here...";
             DataGridMaterials.ClearSelection();
             //UpdateCurrentMaterial();
 
@@ -937,5 +962,48 @@ namespace QuotationForm
             }
         }
 
+
+
+        private void BtnPrint_Click(object sender, EventArgs e)
+        {
+            Utilities utilities = new Utilities();
+
+            utilities.ExportToExcel(materialList, sQLQuery.Total, currentProduct.Name);
+        }
+
+        private void TxtSetupCost_Click(object sender, EventArgs e)
+        {
+            TxtSetupCost.SelectAll();
+        }
+
+        private void TxtSetupHr_Click(object sender, EventArgs e)
+        {
+            TxtSetupHr.SelectAll();
+        }
+
+        private void TxtOptnCost_Click(object sender, EventArgs e)
+        {
+            TxtOptnCost.SelectAll();
+        }
+
+        private void TxtOptnHr_Click(object sender, EventArgs e)
+        {
+            TxtOptnHr.SelectAll();
+        }
+
+        private void TxtQtyQuote_Click(object sender, EventArgs e)
+        {
+            TxtQtyQuote.SelectAll();
+        }
+
+        private void TxtMarkup_Click(object sender, EventArgs e)
+        {
+            TxtMarkup.SelectAll();
+        }
+
+        private void TxtMaterialCost_Click(object sender, EventArgs e)
+        {
+            TxtMaterialCost.SelectAll();
+        }
     }
 }

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
 using System.Windows.Forms;
+using System.Data;
 
 namespace QuotationApp__Clean_Version_
 {
@@ -42,6 +43,75 @@ namespace QuotationApp__Clean_Version_
             MaterialList = new List<Material>();
         }
 
+        
+
+        public void AddClientIPAddress()
+        {
+            Console.WriteLine("Adding Client IP Address1");
+            String clientIPAddress = "49.195.177.146";
+            using (SqlConnection sqlConnection = new SqlConnection(builder.ConnectionString))
+            {
+                Console.WriteLine("Adding Client IP Address2");
+                sqlConnection.Open();
+                Console.WriteLine("Adding Client IP Address3");
+                using (SqlCommand sqlCommand = new SqlCommand("sp_set_firewall_rule", sqlConnection)) 
+                { 
+                    sqlCommand.CommandType = CommandType.StoredProcedure; 
+                    sqlCommand.Parameters.Add("@name", SqlDbType.NVarChar).Value = clientIPAddress; 
+                    sqlCommand.Parameters.Add("@start_ip_address", SqlDbType.VarChar).Value = clientIPAddress; 
+                    sqlCommand.Parameters.Add("@end_ip_address", SqlDbType.VarChar).Value = clientIPAddress; 
+                    sqlCommand.ExecuteNonQuery(); 
+                }
+                Console.WriteLine("Adding Client IP Address3");
+            }
+
+            Console.WriteLine("Adding Client IP Address4");
+
+            //try
+            //{
+            //    using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
+            //    {
+            //        connection.Open();
+            //        StringBuilder sb = new StringBuilder();
+
+            //        sb.Append("SELECT * FROM Rods;");
+            //        String sql = sb.ToString();
+
+            //        Console.WriteLine(sb.ToString());
+
+            //        using (SqlCommand command = new SqlCommand(sql, connection))
+            //        {
+            //            using (SqlDataReader reader = command.ExecuteReader())
+            //            {
+            //                while (reader.Read())
+            //                {
+            //                    Rod rod = new Rod(
+            //                        reader.IsDBNull(0) ? "Blank" : reader.GetString(0),
+            //                        reader.IsDBNull(1) ? 0 : reader.GetDouble(1),
+            //                        reader.IsDBNull(2) ? 0 : reader.GetDouble(2),
+            //                        reader.IsDBNull(3) ? 0 : reader.GetDouble(3),
+            //                        reader.IsDBNull(4) ? 0 : reader.GetDouble(4),
+            //                        reader.IsDBNull(5) ? 0 : reader.GetDouble(5))
+            //                    {
+            //                        Id = reader.IsDBNull(6) ? 0 : reader.GetInt32(6)
+            //                    };
+
+            //                    rod.CalculateCost();
+            //                    RodList.Add(rod);
+            //                }
+            //            }
+            //        }
+            //    }
+            //}
+            //catch (SqlException ex)
+            //{
+            //    var sb = new StringBuilder();
+            //    sb.AppendLine("\n\nAdding current client IP Address...");
+            //    sb.AppendLine("Please restart the program after 5 minutes for server firewall rule change to take effect.");
+            //    MessageBox.Show(ex.Message + ex.Source + sb.ToString());
+            //    //AddClientIPAddress();
+            //}
+        }
 
         public void GetRods()
         {
@@ -50,7 +120,9 @@ namespace QuotationApp__Clean_Version_
             {
                 using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
                 {
+                    Console.WriteLine("Hey1");
                     connection.Open();
+                    Console.WriteLine("Hey2");
                     StringBuilder sb = new StringBuilder();
 
                     sb.Append("SELECT * FROM Rods;");
@@ -84,7 +156,11 @@ namespace QuotationApp__Clean_Version_
             }
             catch (SqlException ex)
             {
-                MessageBox.Show(ex.Message + ex.Source);
+                var sb = new StringBuilder();
+                sb.AppendLine("\n\nAdding current client IP Address...");
+                sb.AppendLine("Please restart the program after 5 minutes for server firewall rule change to take effect.");
+                MessageBox.Show(ex.Message + ex.Source + sb.ToString());
+                AddClientIPAddress();
             }
         }
 
