@@ -33,18 +33,20 @@
             // 
             // TextBox1
             // 
-            this.TextBox1.Location = new System.Drawing.Point(12, 12);
+            this.TextBox1.Location = new System.Drawing.Point(9, 10);
+            this.TextBox1.Margin = new System.Windows.Forms.Padding(2);
             this.TextBox1.Name = "TextBox1";
-            this.TextBox1.Size = new System.Drawing.Size(343, 22);
+            this.TextBox1.Size = new System.Drawing.Size(258, 20);
             this.TextBox1.TabIndex = 0;
             this.TextBox1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBox1_KeyDown);
             // 
             // Form2
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(367, 45);
+            this.ClientSize = new System.Drawing.Size(275, 37);
             this.Controls.Add(this.TextBox1);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Form2";
             this.Text = "Form2";
             this.ResumeLayout(false);

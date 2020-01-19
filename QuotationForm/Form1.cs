@@ -29,6 +29,7 @@ namespace QuotationForm
         //***************FIELDS OF QUOTATION**********************
         private List<Material> productList;
         private List<Material> materialList;
+        private List<Material> recycleList;
         private Material currentProduct;
         private Material currentMaterial;
 
@@ -49,6 +50,9 @@ namespace QuotationForm
 
             sQLQuery.GetProducts();
             productList = new List<Material>(sQLQuery.ProductList);
+
+            sQLQuery.GetRecyclingProducts();
+            recycleList = new List<Material>(sQLQuery.RecyclingList);
 
             ComboBoxProducts.DisplayMember = "Name";
             ComboBoxProducts.ValueMember = "Id";
@@ -649,8 +653,61 @@ namespace QuotationForm
 
         private void BtnDeleteProduct_Click(object sender, EventArgs e)
         {
-            sQLQuery.DeleteProduct(currentProduct.Id);
-            DisplayProducts();
+            var sb = new StringBuilder();
+            sb.Append("Are you sure you want to delete: " + currentProduct.Name);
+
+            if (MessageBox.Show(sb.ToString(), "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                // user clicked yes
+                sQLQuery.DeleteProduct(currentProduct.Id);
+                DisplayProducts();
+                Print("deleted");
+            }
+            else
+            {
+                // user clicked no
+                Print("not deleted");
+            }        
+            // REQUEST BY TITO TONY: PUT RECYCLING BIN OR AN UNDO COMMAND
+        }
+
+        private void BtnRestore_Click(object sender, EventArgs e)
+        {
+            //sQLQuery.RestoreProduct(361);
+            sQLQuery.GetRecyclingProducts();
+            recycleList = new List<Material>(sQLQuery.RecyclingList);
+            
+            if (recycleList.Count > 0)
+            {
+                Recycling_Bin recycling = new Recycling_Bin(recycleList);
+                recycling.StartPosition = FormStartPosition.CenterParent;
+                recycling.Text = "Recycling Bin";
+                double id;
+
+
+
+                if (recycling.ShowDialog(this) == DialogResult.OK)
+                {
+                    // Read the contents of testDialog's TextBox.
+                    if (recycling.ComboBoxRecycle.SelectedIndex != -1)
+                    {
+                        id = ((Material)recycling.ComboBoxRecycle.SelectedItem).Id;
+                        sQLQuery.RestoreProduct(id);
+                    }
+
+                }
+                else
+                {
+
+                }
+
+
+                DisplayProducts();
+            }
+            else
+            {
+                MessageBox.Show("Empty Recycle Bin");
+            }
         }
 
         public string ShowMyDialogBox()
@@ -658,7 +715,7 @@ namespace QuotationForm
             Form2 testDialog = new Form2();
             testDialog.StartPosition = FormStartPosition.CenterParent;
             testDialog.Text = "Enter Job Name:";
-            var name = "blank";
+            string name;
             // Show testDialog as a modal dialog and determine if DialogResult = OK.
             if (testDialog.ShowDialog(this) == DialogResult.OK)
             {
@@ -669,7 +726,7 @@ namespace QuotationForm
             {
                 name = testDialog.TextBox1.Text.ToString();
             }
-            
+
             testDialog.Dispose();
             return name;
         }
@@ -1005,5 +1062,12 @@ namespace QuotationForm
         {
             TxtMaterialCost.SelectAll();
         }
+
+        private void TxtName_Click(object sender, EventArgs e)
+        {
+            TxtName.SelectAll();
+        }
+
+        
     }
 }

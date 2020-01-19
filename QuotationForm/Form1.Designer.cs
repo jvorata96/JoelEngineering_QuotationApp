@@ -84,6 +84,7 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.BtnPrint = new System.Windows.Forms.Button();
+            this.BtnRecycle = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridMaterials)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -338,7 +339,7 @@
             // 
             // BtnDeleteProduct
             // 
-            this.BtnDeleteProduct.Location = new System.Drawing.Point(496, 25);
+            this.BtnDeleteProduct.Location = new System.Drawing.Point(491, 25);
             this.BtnDeleteProduct.Name = "BtnDeleteProduct";
             this.BtnDeleteProduct.Size = new System.Drawing.Size(75, 23);
             this.BtnDeleteProduct.TabIndex = 26;
@@ -378,6 +379,7 @@
             this.TxtName.Size = new System.Drawing.Size(456, 22);
             this.TxtName.TabIndex = 29;
             this.TxtName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.TxtName.Click += new System.EventHandler(this.TxtName_Click);
             this.TxtName.TextChanged += new System.EventHandler(this.TxtName_TextChanged);
             // 
             // TxtSetupCost
@@ -643,6 +645,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.BtnRecycle);
             this.groupBox2.Controls.Add(this.BtnPrint);
             this.groupBox2.Controls.Add(this.label23);
             this.groupBox2.Controls.Add(this.label22);
@@ -683,13 +686,23 @@
             // 
             // BtnPrint
             // 
-            this.BtnPrint.Location = new System.Drawing.Point(650, 23);
+            this.BtnPrint.Location = new System.Drawing.Point(650, 25);
             this.BtnPrint.Name = "BtnPrint";
             this.BtnPrint.Size = new System.Drawing.Size(78, 23);
             this.BtnPrint.TabIndex = 53;
             this.BtnPrint.Text = "Print";
             this.BtnPrint.UseVisualStyleBackColor = true;
             this.BtnPrint.Click += new System.EventHandler(this.BtnPrint_Click);
+            // 
+            // BtnRecycle
+            // 
+            this.BtnRecycle.Location = new System.Drawing.Point(569, 25);
+            this.BtnRecycle.Name = "BtnRecycle";
+            this.BtnRecycle.Size = new System.Drawing.Size(78, 23);
+            this.BtnRecycle.TabIndex = 54;
+            this.BtnRecycle.Text = "Recycle Bin";
+            this.BtnRecycle.UseVisualStyleBackColor = true;
+            this.BtnRecycle.Click += new System.EventHandler(this.BtnRestore_Click);
             // 
             // Form1
             // 
@@ -768,6 +781,7 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button BtnPrint;
+        private System.Windows.Forms.Button BtnRecycle;
     }
 }
 

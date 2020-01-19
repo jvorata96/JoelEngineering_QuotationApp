@@ -24,6 +24,8 @@ namespace QuotationApp__Clean_Version_
 
         //***************QUOTATION FIELDS***************//
         public List<Material> ProductList { get; set; }
+
+        public List<Material> RecyclingList { get; set; }
         public List<Material> MaterialList { get; set; }
 
         public double Total { get; private set; }
@@ -41,6 +43,7 @@ namespace QuotationApp__Clean_Version_
 
             ProductList = new List<Material>();
             MaterialList = new List<Material>();
+            RecyclingList = new List<Material>();
         }
 
         
@@ -489,6 +492,57 @@ namespace QuotationApp__Clean_Version_
             }
         }
 
+        public void GetRecyclingProducts()
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
+                {
+                    RecyclingList.Clear();
+
+                    connection.Open();
+                    StringBuilder sb = new StringBuilder();
+
+                    sb.Append("SELECT * FROM Sheet1$ WHERE GRP_ID = ID;");
+                    String sql = sb.ToString();
+
+                    Console.WriteLine(sb.ToString());
+
+                    using (SqlCommand command = new SqlCommand(sql, connection))
+                    {
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                Material material = new Material
+                                {
+                                    Name = reader.GetString(0),
+                                    Material_Cost = reader.IsDBNull(1) ? 0 : (float)reader.GetDouble(1),
+                                    Setup_Hr = reader.IsDBNull(2) ? 0 : (float)reader.GetDouble(2),
+                                    Setup_Cost = reader.IsDBNull(3) ? 0 : (UInt32)reader.GetDouble(3),
+                                    Operation_Hr = reader.IsDBNull(4) ? 0 : (float)reader.GetDouble(4),
+                                    Operation_Cost = reader.IsDBNull(5) ? 0 : (UInt32)reader.GetDouble(5),
+                                    Markup = reader.IsDBNull(6) ? 0 : (float)reader.GetDouble(6),
+                                    Qty = 1,
+                                    Id = (float)reader.GetInt32(7),
+                                    Grp_Id = reader.IsDBNull(8) ? 0 : (float)reader.GetInt32(8)
+                                };
+
+                                material.SetSubTotal();
+                                material.SetPricePerPiece();
+
+                                RecyclingList.Add(material);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show(ex.Message + ex.Source);
+            }
+        }
+
         public void AddProduct(Material material)
         {
             try
@@ -526,7 +580,42 @@ namespace QuotationApp__Clean_Version_
                     connection.Open();
 
                     StringBuilder sb = new StringBuilder();
-                    sb.Append("DELETE FROM Sheet1$ WHERE ID=" + id.ToString());
+                    //sb.Append("DELETE FROM Sheet1$ WHERE ID=" + id.ToString());
+                    sb.Append("UPDATE Sheet1$ ");
+                    sb.Append("SET [GRP_ID]=" + id + " ");
+                    sb.Append("WHERE [ID]=" + id + ";");
+
+                    String sql = sb.ToString();
+
+                    Console.WriteLine(sb.ToString());
+
+                    using (SqlCommand command = new SqlCommand(sql, connection))
+                    {
+                        command.ExecuteNonQuery();
+                    }
+
+                }
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show(ex.Message + ex.Source);
+            }
+        }
+
+        public void RestoreProduct(double id)
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
+                {
+                    connection.Open();
+
+                    StringBuilder sb = new StringBuilder();
+                    //sb.Append("DELETE FROM Sheet1$ WHERE ID=" + id.ToString());
+                    sb.Append("UPDATE Sheet1$ ");
+                    sb.Append("SET [GRP_ID]= NULL ");
+                    sb.Append("WHERE [ID]=" + id + ";");
+
                     String sql = sb.ToString();
 
                     Console.WriteLine(sb.ToString());
