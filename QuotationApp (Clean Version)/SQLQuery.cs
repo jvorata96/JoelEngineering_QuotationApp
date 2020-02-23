@@ -30,6 +30,8 @@ namespace QuotationApp__Clean_Version_
 
         public double Total { get; private set; }
 
+        public double TotalProfit { get; private set; }
+
         public SQLQuery()
         {
             RodList = new List<Rod> { _blankRod };
@@ -796,6 +798,17 @@ namespace QuotationApp__Clean_Version_
             }
 
             Total = tempTotal;
+        }
+
+        public void CalculateTotalProfit()
+        {
+            double tempTotalProfit = 0;
+            foreach (var mat in MaterialList)
+            {
+                tempTotalProfit += mat.SubProfit;
+            }
+
+            TotalProfit = tempTotalProfit;
         }
     }
 }

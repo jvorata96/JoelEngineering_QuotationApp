@@ -83,8 +83,10 @@
             this.label23 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.BtnPrint = new System.Windows.Forms.Button();
             this.BtnRecycle = new System.Windows.Forms.Button();
+            this.BtnPrint = new System.Windows.Forms.Button();
+            this.TxtTotalProfit = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridMaterials)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -136,7 +138,7 @@
             // 
             // BtnSaveRawMaterial
             // 
-            this.BtnSaveRawMaterial.Location = new System.Drawing.Point(102, 398);
+            this.BtnSaveRawMaterial.Location = new System.Drawing.Point(102, 458);
             this.BtnSaveRawMaterial.Name = "BtnSaveRawMaterial";
             this.BtnSaveRawMaterial.Size = new System.Drawing.Size(75, 23);
             this.BtnSaveRawMaterial.TabIndex = 5;
@@ -146,7 +148,7 @@
             // 
             // BtnDeleteRawMaterial
             // 
-            this.BtnDeleteRawMaterial.Location = new System.Drawing.Point(102, 426);
+            this.BtnDeleteRawMaterial.Location = new System.Drawing.Point(102, 486);
             this.BtnDeleteRawMaterial.Name = "BtnDeleteRawMaterial";
             this.BtnDeleteRawMaterial.Size = new System.Drawing.Size(75, 23);
             this.BtnDeleteRawMaterial.TabIndex = 6;
@@ -156,7 +158,7 @@
             // 
             // TxtRawName
             // 
-            this.TxtRawName.Location = new System.Drawing.Point(56, 374);
+            this.TxtRawName.Location = new System.Drawing.Point(56, 434);
             this.TxtRawName.Name = "TxtRawName";
             this.TxtRawName.Size = new System.Drawing.Size(168, 20);
             this.TxtRawName.TabIndex = 14;
@@ -186,7 +188,7 @@
             // 
             // TxtQty
             // 
-            this.TxtQty.Location = new System.Drawing.Point(56, 276);
+            this.TxtQty.Location = new System.Drawing.Point(56, 336);
             this.TxtQty.Name = "TxtQty";
             this.TxtQty.Size = new System.Drawing.Size(79, 20);
             this.TxtQty.TabIndex = 13;
@@ -196,7 +198,7 @@
             // 
             // TxtLength
             // 
-            this.TxtLength.Location = new System.Drawing.Point(145, 172);
+            this.TxtLength.Location = new System.Drawing.Point(145, 206);
             this.TxtLength.Name = "TxtLength";
             this.TxtLength.Size = new System.Drawing.Size(79, 20);
             this.TxtLength.TabIndex = 10;
@@ -206,7 +208,7 @@
             // 
             // TxtDiameter
             // 
-            this.TxtDiameter.Location = new System.Drawing.Point(56, 172);
+            this.TxtDiameter.Location = new System.Drawing.Point(56, 206);
             this.TxtDiameter.Name = "TxtDiameter";
             this.TxtDiameter.Size = new System.Drawing.Size(79, 20);
             this.TxtDiameter.TabIndex = 11;
@@ -226,7 +228,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(164, 195);
+            this.label5.Location = new System.Drawing.Point(164, 229);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(40, 13);
             this.label5.TabIndex = 14;
@@ -235,7 +237,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(72, 195);
+            this.label6.Location = new System.Drawing.Point(72, 229);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(49, 13);
             this.label6.TabIndex = 15;
@@ -244,7 +246,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(74, 299);
+            this.label7.Location = new System.Drawing.Point(74, 359);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(46, 13);
             this.label7.TabIndex = 16;
@@ -261,7 +263,7 @@
             // 
             // TxtUnitPrice
             // 
-            this.TxtUnitPrice.Location = new System.Drawing.Point(145, 276);
+            this.TxtUnitPrice.Location = new System.Drawing.Point(145, 336);
             this.TxtUnitPrice.Name = "TxtUnitPrice";
             this.TxtUnitPrice.ReadOnly = true;
             this.TxtUnitPrice.Size = new System.Drawing.Size(79, 20);
@@ -270,7 +272,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(160, 299);
+            this.label9.Location = new System.Drawing.Point(160, 359);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(53, 13);
             this.label9.TabIndex = 19;
@@ -278,7 +280,7 @@
             // 
             // TxtTotalPrice
             // 
-            this.TxtTotalPrice.Location = new System.Drawing.Point(99, 325);
+            this.TxtTotalPrice.Location = new System.Drawing.Point(99, 385);
             this.TxtTotalPrice.Name = "TxtTotalPrice";
             this.TxtTotalPrice.ReadOnly = true;
             this.TxtTotalPrice.Size = new System.Drawing.Size(79, 20);
@@ -287,7 +289,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(112, 348);
+            this.label10.Location = new System.Drawing.Point(112, 408);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(58, 13);
             this.label10.TabIndex = 21;
@@ -295,7 +297,7 @@
             // 
             // TxtThickness
             // 
-            this.TxtThickness.Location = new System.Drawing.Point(99, 217);
+            this.TxtThickness.Location = new System.Drawing.Point(99, 251);
             this.TxtThickness.Name = "TxtThickness";
             this.TxtThickness.Size = new System.Drawing.Size(79, 20);
             this.TxtThickness.TabIndex = 12;
@@ -306,7 +308,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(112, 241);
+            this.label11.Location = new System.Drawing.Point(112, 275);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(56, 13);
             this.label11.TabIndex = 23;
@@ -326,6 +328,8 @@
             this.ComboBoxProducts.Size = new System.Drawing.Size(360, 21);
             this.ComboBoxProducts.TabIndex = 24;
             this.ComboBoxProducts.SelectedIndexChanged += new System.EventHandler(this.ComboBoxProducts_SelectedIndexChanged);
+            this.ComboBoxProducts.Click += new System.EventHandler(this.ComboBoxProducts_Click);
+            this.ComboBoxProducts.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ComboBoxProducts_KeyDown);
             // 
             // BtnAddProduct
             // 
@@ -391,6 +395,7 @@
             this.TxtSetupCost.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.TxtSetupCost.Click += new System.EventHandler(this.TxtSetupCost_Click);
             this.TxtSetupCost.TextChanged += new System.EventHandler(this.TxtSetupCost_TextChanged);
+            //this.TxtSetupCost.LostFocus += new System.EventHandler(this.TxtSetupCost_LostFocus);
             // 
             // TxtOptnCost
             // 
@@ -401,6 +406,7 @@
             this.TxtOptnCost.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.TxtOptnCost.Click += new System.EventHandler(this.TxtOptnCost_Click);
             this.TxtOptnCost.TextChanged += new System.EventHandler(this.TxtOptnCost_TextChanged);
+            //this.TxtOptnCost.LostFocus += new System.EventHandler(this.TxtOptnCost_LostFocus);
             // 
             // TxtMaterialCost
             // 
@@ -411,6 +417,7 @@
             this.TxtMaterialCost.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.TxtMaterialCost.Click += new System.EventHandler(this.TxtMaterialCost_Click);
             this.TxtMaterialCost.TextChanged += new System.EventHandler(this.TxtUnitPriceQuote_TextChanged);
+            //this.TxtMaterialCost.LostFocus += new System.EventHandler(this.TxtMaterialCost_LostFocus);
             // 
             // TxtSetupHr
             // 
@@ -642,9 +649,12 @@
             this.groupBox1.TabIndex = 53;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Material Calculator";
+            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.label1);
+            this.groupBox2.Controls.Add(this.TxtTotalProfit);
             this.groupBox2.Controls.Add(this.BtnRecycle);
             this.groupBox2.Controls.Add(this.BtnPrint);
             this.groupBox2.Controls.Add(this.label23);
@@ -684,6 +694,16 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Quotation";
             // 
+            // BtnRecycle
+            // 
+            this.BtnRecycle.Location = new System.Drawing.Point(569, 25);
+            this.BtnRecycle.Name = "BtnRecycle";
+            this.BtnRecycle.Size = new System.Drawing.Size(78, 23);
+            this.BtnRecycle.TabIndex = 54;
+            this.BtnRecycle.Text = "Recycle Bin";
+            this.BtnRecycle.UseVisualStyleBackColor = true;
+            this.BtnRecycle.Click += new System.EventHandler(this.BtnRestore_Click);
+            // 
             // BtnPrint
             // 
             this.BtnPrint.Location = new System.Drawing.Point(650, 25);
@@ -694,15 +714,25 @@
             this.BtnPrint.UseVisualStyleBackColor = true;
             this.BtnPrint.Click += new System.EventHandler(this.BtnPrint_Click);
             // 
-            // BtnRecycle
+            // TxtTotalProfit
             // 
-            this.BtnRecycle.Location = new System.Drawing.Point(569, 25);
-            this.BtnRecycle.Name = "BtnRecycle";
-            this.BtnRecycle.Size = new System.Drawing.Size(78, 23);
-            this.BtnRecycle.TabIndex = 54;
-            this.BtnRecycle.Text = "Recycle Bin";
-            this.BtnRecycle.UseVisualStyleBackColor = true;
-            this.BtnRecycle.Click += new System.EventHandler(this.BtnRestore_Click);
+            this.TxtTotalProfit.Location = new System.Drawing.Point(744, 124);
+            this.TxtTotalProfit.Name = "TxtTotalProfit";
+            this.TxtTotalProfit.ReadOnly = true;
+            this.TxtTotalProfit.Size = new System.Drawing.Size(112, 20);
+            this.TxtTotalProfit.TabIndex = 55;
+            this.TxtTotalProfit.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(758, 147);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(85, 20);
+            this.label1.TabIndex = 56;
+            this.label1.Text = "Total Profit";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // Form1
             // 
@@ -782,6 +812,8 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button BtnPrint;
         private System.Windows.Forms.Button BtnRecycle;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox TxtTotalProfit;
     }
 }
 

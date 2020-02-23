@@ -17,8 +17,8 @@ namespace QuotationForm
         private SQLQuery sQLQuery;
 
         //***************FIELDS OF MATERIAL CALCULATOR**********************
-        private enum _materialType {Rods, HollowRods, Flats};
-        private readonly List<_materialType> _materialTypes = new List<_materialType>{_materialType.Rods, _materialType.HollowRods, _materialType.Flats };
+        private enum _materialType {Rounds, Hollow_Rounds, Flats};
+        private readonly List<_materialType> _materialTypes = new List<_materialType>{_materialType.Rounds, _materialType.Hollow_Rounds, _materialType.Flats };
 
         List<RawMaterial> rawMaterials;
 
@@ -76,10 +76,10 @@ namespace QuotationForm
                 case 0:
                     Print("Rods");
                     label5.Text = "Length";
-                    label5.Location = new Point(162, 195);
+                    label5.Location = new Point(162, 229);
 
                     label6.Text = "Diameter";
-                    label6.Location = new Point(72, 195);
+                    label6.Location = new Point(72, 229);
 
                     sQLQuery.GetRods();
                     rawMaterials = new List<RawMaterial>(sQLQuery.RodList);
@@ -87,24 +87,24 @@ namespace QuotationForm
                     label11.Visible = false;
                     TxtThickness.Visible = false;
 
-                    TxtLength.Location = new Point(145, 172);
+                    TxtLength.Location = new Point(145, 206);
 
                     break;
                 case 1:
                     Print("Hollows");
                     label11.Visible = true;
                     label11.Text = "Length";
-                    label11.Location = new Point(120,241);
+                    label11.Location = new Point(120,275);
 
                     label5.Text = "Inner Diameter";
-                    label5.Location = new Point(147, 195);
+                    label5.Location = new Point(147, 229);
                     
                     label6.Text = "Outer Diameter";
-                    label6.Location = new Point(58, 195);
+                    label6.Location = new Point(58, 229);
                     TxtThickness.Visible = true;
 
-                    TxtThickness.Location = new Point(145, 172);
-                    TxtLength.Location = new Point(99, 217);
+                    TxtThickness.Location = new Point(145, 206);
+                    TxtLength.Location = new Point(99, 251);
 
                     sQLQuery.GetHollowRods();
                     rawMaterials = new List<RawMaterial>(sQLQuery.HollowRodList);
@@ -114,14 +114,14 @@ namespace QuotationForm
                     Print("Flats");
                     label11.Visible = true;
                     label11.Text = "Length";
-                    label11.Location = new Point(120, 241);
+                    label11.Location = new Point(120, 275);
 
                     label5.Text = "Width";
-                    label5.Location = new Point(167, 195);
+                    label5.Location = new Point(167, 229);
                     TxtThickness.Visible = true;
 
                     label6.Text = "Thickness";
-                    label6.Location = new Point(70, 195);
+                    label6.Location = new Point(70, 229);
                     TxtThickness.Visible = true;
 
                     sQLQuery.GetFlats();
@@ -331,13 +331,13 @@ namespace QuotationForm
             switch(ComboMaterialType.SelectedIndex)
             {
                 case 0:
-                    TxtLength.Text = string.Format("{0:N6}", currentRod.Length);
+                    TxtLength.Text = string.Format("{0:N2}", currentRod.Length);
                     break;
                 case 1:
-                    TxtLength.Text = string.Format("{0:N6}", currentHollowRod.Length);
+                    TxtLength.Text = string.Format("{0:N2}", currentHollowRod.Length);
                     break;
                 case 2:
-                    TxtLength.Text = string.Format("{0:N6}", currentFlat.Length);
+                    TxtLength.Text = string.Format("{0:N2}", currentFlat.Length);
                     break;
             }
         }
@@ -346,7 +346,7 @@ namespace QuotationForm
         {
             bool isNumeric = double.TryParse(TxtDiameter.Text, out double diameter);
 
-            if (TxtLength.TextLength > 0 && isNumeric)
+            if (TxtDiameter.TextLength > 0 && isNumeric)
             {
                 //currentRod = ((Rod)ComboMaterialName.SelectedItem);
                 currentRod.Diameter = diameter;
@@ -361,13 +361,13 @@ namespace QuotationForm
             switch (ComboMaterialType.SelectedIndex)
             {
                 case 0:
-                    TxtDiameter.Text = string.Format("{0:N6}", currentRod.Diameter);
+                    TxtDiameter.Text = string.Format("{0:N2}", currentRod.Diameter);
                     break;
                 case 1:
-                    TxtDiameter.Text = string.Format("{0:N6}", currentHollowRod.DiameterOut);
+                    TxtDiameter.Text = string.Format("{0:N2}", currentHollowRod.DiameterOut);
                     break;
                 case 2:
-                    TxtDiameter.Text = string.Format("{0:N6}", currentFlat.Width);
+                    TxtDiameter.Text = string.Format("{0:N2}", currentFlat.Width);
                     break;
             }
         }
@@ -376,7 +376,7 @@ namespace QuotationForm
         {
             bool isNumeric = double.TryParse(TxtThickness.Text, out double thickness);
 
-            if (TxtLength.TextLength > 0 && isNumeric)
+            if (TxtThickness.TextLength > 0 && isNumeric)
             {
                 //currentRod = ((Rod)ComboMaterialName.SelectedItem);
                 //currentRod.Diameter = thickness;
@@ -393,10 +393,10 @@ namespace QuotationForm
                 case 0:
                     break;
                 case 1:
-                    TxtThickness.Text = string.Format("{0:N6}", currentHollowRod.DiameterIn);
+                    TxtThickness.Text = string.Format("{0:N2}", currentHollowRod.DiameterIn);
                     break;
                 case 2:
-                    TxtThickness.Text = string.Format("{0:N6}", currentFlat.Thickness);
+                    TxtThickness.Text = string.Format("{0:N2}", currentFlat.Thickness);
                     break;
             }
         }
@@ -405,7 +405,7 @@ namespace QuotationForm
         {
             bool isNumeric = decimal.TryParse(TxtPricePerKilo.Text, System.Globalization.NumberStyles.Any, CultureInfo.CreateSpecificCulture("en-AU"), out decimal pricePerKilo);
 
-            if (TxtLength.TextLength > 0 && isNumeric)
+            if (TxtPricePerKilo.TextLength > 0 && isNumeric)
             {
                 //currentRod = ((Rod)ComboMaterialName.SelectedItem);
                 currentRod.CostPerKg = (double)pricePerKilo;
@@ -437,7 +437,7 @@ namespace QuotationForm
         {
             bool isNumeric = double.TryParse(TxtQty.Text, out double qty);
 
-            if (TxtLength.TextLength > 0 && isNumeric)
+            if (TxtQty.TextLength > 0 && isNumeric)
             {
                 //currentRod = ((Rod)ComboMaterialName.SelectedItem);
                 currentRod.Qty = qty;
@@ -760,6 +760,7 @@ namespace QuotationForm
 
             DataGridMaterials.Columns["SubTotal"].DefaultCellStyle.Format = "C2";
             DataGridMaterials.Columns["Price_Per_Piece"].DefaultCellStyle.Format = "C2";
+            DataGridMaterials.Columns["SubProfit"].DefaultCellStyle.Format = "C2";
             DataGridMaterials.Columns["Subtotal"].HeaderText = "SubTotal";
             DataGridMaterials.Columns["Price_Per_Piece"].HeaderText = "Unit Price";
             DataGridMaterials.Columns["Qty"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
@@ -775,6 +776,11 @@ namespace QuotationForm
             DataGridMaterials.Columns["Qty"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
             DataGridMaterials.Columns["SubTotal"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
             DataGridMaterials.Columns["Price_Per_Piece"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            DataGridMaterials.Columns["SubProfit"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            DataGridMaterials.Columns["SubProfit"].ReadOnly = true;
+            DataGridMaterials.Columns["SubProfit"].HeaderText = "Profit";
+            DataGridMaterials.Columns["SubProfit"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            
 
             DataGridMaterials.Columns["Material_Cost"].Visible = false;
             DataGridMaterials.Columns["Material_Cost"].Visible = false;
@@ -786,11 +792,13 @@ namespace QuotationForm
             DataGridMaterials.Columns["Markup"].Visible = false;
             DataGridMaterials.Columns["Id"].Visible = false;
             DataGridMaterials.Columns["Grp_Id"].Visible = false;
+            //DataGridMaterials.Columns["Profit_Ov"].Visible = false;
+            
             
 
             DataGridMaterials.ClearSelection();
             DisplayTotal();
-            
+            DisplayTotalProfit();
         }
 
         private void DisplayTotal()
@@ -798,6 +806,15 @@ namespace QuotationForm
             sQLQuery.CalculateTotal();
             //var culture = new CultureInfo("en-AU");
             TxtTotal.Text = string.Format("{0:C2}", sQLQuery.Total);
+        }
+
+        
+
+        private void DisplayTotalProfit()
+        {
+            sQLQuery.CalculateTotalProfit();
+            //var culture = new CultureInfo("en-AU");
+            TxtTotalProfit.Text = string.Format("{0:C2}", sQLQuery.TotalProfit);
         }
 
         private bool AreAllFilledOut()
@@ -1033,6 +1050,21 @@ namespace QuotationForm
             TxtSetupCost.SelectAll();
         }
 
+        //private void TxtSetupCost_LostFocus(object sender, EventArgs e)
+        //{
+        //    switch (ComboMaterialType.SelectedIndex)
+        //    {
+        //        case 0:
+        //            break;
+        //        case 1:
+        //            TxtThickness.Text = string.Format("{0:N2}", currentHollowRod.DiameterIn);
+        //            break;
+        //        case 2:
+        //            TxtThickness.Text = string.Format("{0:N2}", currentFlat.Thickness);
+        //            break;
+        //    }
+        //}
+
         private void TxtSetupHr_Click(object sender, EventArgs e)
         {
             TxtSetupHr.SelectAll();
@@ -1068,6 +1100,29 @@ namespace QuotationForm
             TxtName.SelectAll();
         }
 
-        
+        private void radioButton1_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ComboBoxProducts_KeyDown(object sender, KeyEventArgs e)
+        {
+            ComboBoxProducts.DroppedDown = false;
+        }
+
+        private void ComboBoxProducts_Click(object sender, EventArgs e)
+        {
+            ComboBoxProducts.SelectAll();
+        }
     }
 }

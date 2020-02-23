@@ -50,7 +50,7 @@ namespace QuotationApp__Clean_Version_
         }
         public override void CalculateCost()
         {
-            UnitCost = (Width * Thickness * Length * Density * CostPerKg);
+            UnitCost = (Width * Thickness * Length * Density * CostPerKg) / 1000000000;
             TotalCost = UnitCost * Qty;
         }
     }

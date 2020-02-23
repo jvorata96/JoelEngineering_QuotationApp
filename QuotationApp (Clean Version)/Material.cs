@@ -20,10 +20,12 @@ namespace QuotationApp__Clean_Version_
         public double Grp_Id { get; set; }
 
         public double Price_Per_Piece { get; set; }
+        public double SubProfit { get; set; }
 
         public void SetPricePerPiece()
         {
             Price_Per_Piece = SubTotal / Qty;
+            SubProfit = (Price_Per_Piece * Markup / (1 + Markup)) * Qty;
         }
 
         public double SubTotal { get; set; }
@@ -32,6 +34,8 @@ namespace QuotationApp__Clean_Version_
         {
             SubTotal = Qty * ((1 + Markup) * (Material_Cost + (Setup_Hr * Setup_Cost / Qty) + (Operation_Hr * Operation_Cost)));
         }
+
+        
 
         public Material()
         {

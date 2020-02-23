@@ -54,7 +54,7 @@ namespace QuotationApp__Clean_Version_
         }
         public override void CalculateCost()
         {
-            UnitCost = (Math.PI * (Math.Pow(DiameterOut/2, 2) - Math.Pow(DiameterIn/2, 2)) * Length * Density * CostPerKg);
+            UnitCost = (Math.PI * (Math.Pow(DiameterOut/2, 2) - Math.Pow(DiameterIn/2, 2)) * Length * Density * CostPerKg) / 1000000000;
             TotalCost = UnitCost * Qty;
         }
     }
