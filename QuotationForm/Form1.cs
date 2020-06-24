@@ -813,8 +813,15 @@ namespace QuotationForm
         private void DisplayTotalProfit()
         {
             sQLQuery.CalculateTotalProfit();
+            //Organize this
+            sQLQuery.CalculateTotalHours();
             //var culture = new CultureInfo("en-AU");
             TxtTotalProfit.Text = string.Format("{0:C2}", sQLQuery.TotalProfit);
+            var sb = new StringBuilder();
+            sb.Append(sQLQuery.TotalHours.ToString() + " Hrs");
+            TxtTotalHours.Text = sb.ToString();
+            sQLQuery.CalculateTotalMtlCost();
+            TxtTotalMtlCost.Text = string.Format("{0:C2}", sQLQuery.TotalMtlCost);
         }
 
         private bool AreAllFilledOut()
@@ -1124,5 +1131,6 @@ namespace QuotationForm
         {
             ComboBoxProducts.SelectAll();
         }
+
     }
 }

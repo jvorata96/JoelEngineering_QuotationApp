@@ -31,6 +31,8 @@ namespace QuotationApp__Clean_Version_
         public double Total { get; private set; }
 
         public double TotalProfit { get; private set; }
+        public double TotalHours { get; private set; }
+        public double TotalMtlCost { get; private set; }
 
         public SQLQuery()
         {
@@ -809,6 +811,26 @@ namespace QuotationApp__Clean_Version_
             }
 
             TotalProfit = tempTotalProfit;
+        }
+
+        public void CalculateTotalHours()
+        {
+            double tempTotalHours = 0;
+            foreach(var mat in MaterialList)
+            {
+                tempTotalHours += mat.Operation_Hr * mat.Qty + mat.Setup_Hr;
+            }
+            TotalHours = tempTotalHours;
+        }
+
+        public void CalculateTotalMtlCost()
+        {
+            double tempTotalMtlCost = 0;
+            foreach(var mat in MaterialList)
+            {
+                tempTotalMtlCost += mat.Material_Cost * mat.Qty;
+            }
+            TotalMtlCost = tempTotalMtlCost;
         }
     }
 }
